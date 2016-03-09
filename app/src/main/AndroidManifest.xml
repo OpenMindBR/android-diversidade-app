@@ -2,12 +2,28 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.edu.ifce.engcomp.francis.diversidade">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <permission
+        android:name="br.edu.ifce.engcomp.francis.diversidade.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="br.edu.ifce.engcomp.francis.diversidade.permission.MAPS_RECEIVE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyC0hqkbPqbrUMTmH0LORiqJ8FGhSxABt5U" />
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -18,8 +34,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Activities.NucleusActivity"
+            android:label="Núcleos"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.edu.ifce.engcomp.francis.diversidade.MainActivity" />
+        </activity>
     </application>
-
-    <!-- chave maps AIzaSyC0hqkbPqbrUMTmH0LORiqJ8FGhSxABt5U -->
 
 </manifest>
