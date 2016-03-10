@@ -1,6 +1,6 @@
 package br.edu.ifce.engcomp.francis.diversidade;
 
-import android.content.Intent;
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -11,16 +11,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import br.edu.ifce.engcomp.francis.diversidade.Activities.NucleusActivity;
+import br.edu.ifce.engcomp.francis.diversidade.Fragments.NucleusFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -72,8 +73,10 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_nucleus) {
-            Intent intentNucleus = new Intent(this, NucleusActivity.class);
-            startActivity(intentNucleus);
+            Fragment fragmentNucleus = new NucleusFragment();
+            android.app.FragmentManager fragmentManagerNucleus = getFragmentManager();
+            toolbar.setTitle("Núcleos");
+            fragmentManagerNucleus.beginTransaction().replace(R.id.content_main_layout, fragmentNucleus).commit();
 
         } else if (id == R.id.nav_discovery) {
 
