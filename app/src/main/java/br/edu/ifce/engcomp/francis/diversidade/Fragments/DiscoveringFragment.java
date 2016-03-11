@@ -2,6 +2,8 @@ package br.edu.ifce.engcomp.francis.diversidade.Fragments;
 
 
 import android.app.Fragment;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,13 +25,15 @@ import br.edu.ifce.engcomp.francis.diversidade.model.TextBlog;
 public class DiscoveringFragment extends Fragment implements RecyclerViewOnClickListenerHack{
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
-    ArrayList<TextBlog> dataSource = new ArrayList<>();
+    ArrayList<TextBlog> dataSource;
 
     public DiscoveringFragment() {
         // Required empty public constructor
     }
 
-    public void generateDataSourceMock(){
+    public ArrayList<TextBlog> generateDataSourceMock(){
+        ArrayList<TextBlog> textBlogArrayList = new ArrayList<>();
+
         TextBlog teste1 = new TextBlog();
         teste1.setTitle("ESTÁ NA HORA DE ACABAR COM O BINARISMO DE GÊNERO");
         teste1.setContent("Justin Hubbel explica em quadrinhos o que é binarismo de gênero, " +
@@ -45,10 +49,18 @@ public class DiscoveringFragment extends Fragment implements RecyclerViewOnClick
         teste2.setSource("http://minhavidagay.com.br/2016/03/10/gay-39-anos/");
         teste2.setCategory("D");
 
-        dataSource.add(teste1);
-        dataSource.add(teste2);
+        textBlogArrayList.add(teste1);
+        textBlogArrayList.add(teste2);
+
+        return textBlogArrayList;
     }
 
+    @Override
+    public void onCreate(Bundle savedInstace){
+        super.onCreate(savedInstace);
+
+        dataSource = generateDataSourceMock();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,9 +68,7 @@ public class DiscoveringFragment extends Fragment implements RecyclerViewOnClick
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_discovering, container, false);
 
-        generateDataSourceMock();
-
-        TextRecyclerViewAdapter adapter = new TextRecyclerViewAdapter(getActivity().getApplicationContext(),dataSource);
+        TextRecyclerViewAdapter adapter = new TextRecyclerViewAdapter(getActivity().getApplicationContext(), dataSource);
         adapter.setRecycleViewOnClickListenerHack(this);
         this.layoutManager = new LinearLayoutManager(getActivity());
         this.recyclerView = (RecyclerView) view.findViewById(R.id.discovering_texts);
@@ -73,6 +83,10 @@ public class DiscoveringFragment extends Fragment implements RecyclerViewOnClick
 
     @Override
     public void onClickListener(View view, int position) {
+        String urlSource = dataSource.get(position).getSource();
 
+        Uri uri = Uri.parse(urlSource);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
     }
 }

@@ -45,22 +45,20 @@ public class TextRecyclerViewAdapter extends RecyclerView.Adapter<TextRecyclerVi
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View itemView = inflater.inflate(R.layout.adapter_layout_text_info,parent,false);
-
         return new ViewHolder (itemView);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         TextBlog textBlog = this.textsDataSource.get(position);
-
-        viewHolder.textTitleTextView.setText(textBlog.getTitle());
-        viewHolder.textContentTextView.setText(textBlog.getContent());
-        viewHolder.textSourceTextView.setText(textBlog.getSource());
+        holder.textTitleTextView.setText(textBlog.getTitle());
+        holder.textContentTextView.setText(textBlog.getContent());
+        holder.textSourceTextView.setText(textBlog.getSource());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return textsDataSource.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
