@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import br.edu.ifce.engcomp.francis.diversidade.Fragments.DiscoveringFragment;
+import br.edu.ifce.engcomp.francis.diversidade.Fragments.HealthFragment;
 import br.edu.ifce.engcomp.francis.diversidade.Fragments.NucleusFragment;
 import br.edu.ifce.engcomp.francis.diversidade.Fragments.RightsFragment;
 
@@ -93,6 +94,10 @@ public class MainActivity extends AppCompatActivity
             fragmentManagerRights.beginTransaction().replace(R.id.content_main_layout, fragmentRights).commit();
 
         } else if (id == R.id.nav_health) {
+            Fragment fragmentHealth = new HealthFragment();
+            android.app.FragmentManager fragmentManagerHealth = getFragmentManager();
+            toolbar.setTitle("Saúde");
+            fragmentManagerHealth.beginTransaction().replace(R.id.content_main_layout, fragmentHealth).commit();
 
         } else if (id == R.id.nav_sugestion) {
 
