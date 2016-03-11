@@ -13,6 +13,7 @@ import android.view.MenuItem;
 
 import br.edu.ifce.engcomp.francis.diversidade.Fragments.DiscoveringFragment;
 import br.edu.ifce.engcomp.francis.diversidade.Fragments.NucleusFragment;
+import br.edu.ifce.engcomp.francis.diversidade.Fragments.RightsFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -86,6 +87,10 @@ public class MainActivity extends AppCompatActivity
             fragmentManagerDiscovering.beginTransaction().replace(R.id.content_main_layout, fragmentDiscovering).commit();
 
         } else if (id == R.id.nav_rights) {
+            Fragment fragmentRights = new RightsFragment();
+            android.app.FragmentManager fragmentManagerRights = getFragmentManager();
+            toolbar.setTitle("Direitos");
+            fragmentManagerRights.beginTransaction().replace(R.id.content_main_layout, fragmentRights).commit();
 
         } else if (id == R.id.nav_health) {
 
