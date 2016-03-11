@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import br.edu.ifce.engcomp.francis.diversidade.Fragments.DiscoveringFragment;
 import br.edu.ifce.engcomp.francis.diversidade.Fragments.NucleusFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -79,6 +80,10 @@ public class MainActivity extends AppCompatActivity
             fragmentManagerNucleus.beginTransaction().replace(R.id.content_main_layout, fragmentNucleus).commit();
 
         } else if (id == R.id.nav_discovery) {
+            Fragment fragmentDiscovering = new DiscoveringFragment();
+            android.app.FragmentManager fragmentManagerDiscovering = getFragmentManager();
+            toolbar.setTitle("Descobrindo-se");
+            fragmentManagerDiscovering.beginTransaction().replace(R.id.content_main_layout, fragmentDiscovering).commit();
 
         } else if (id == R.id.nav_rights) {
 
