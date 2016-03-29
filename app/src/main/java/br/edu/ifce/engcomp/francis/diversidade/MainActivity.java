@@ -3,6 +3,7 @@ package br.edu.ifce.engcomp.francis.diversidade;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -11,10 +12,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import br.edu.ifce.engcomp.francis.diversidade.Fragments.DiscoveringFragment;
-import br.edu.ifce.engcomp.francis.diversidade.Fragments.HealthFragment;
-import br.edu.ifce.engcomp.francis.diversidade.Fragments.NucleusFragment;
-import br.edu.ifce.engcomp.francis.diversidade.Fragments.RightsFragment;
+import br.edu.ifce.engcomp.francis.diversidade.fragments.DiscoveringFragment;
+import br.edu.ifce.engcomp.francis.diversidade.fragments.HealthFragment;
+import br.edu.ifce.engcomp.francis.diversidade.fragments.NucleusFragment;
+import br.edu.ifce.engcomp.francis.diversidade.fragments.RightsFragment;
+import br.edu.ifce.engcomp.francis.diversidade.fragments.SuggestionFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -100,6 +102,10 @@ public class MainActivity extends AppCompatActivity
             fragmentManagerHealth.beginTransaction().replace(R.id.content_main_layout, fragmentHealth).commit();
 
         } else if (id == R.id.nav_sugestion) {
+            Fragment fragmentSuggestion = new SuggestionFragment();
+            android.app.FragmentManager fragmentManagerSuggestion = getFragmentManager();
+            toolbar.setTitle("Sugestão de Núcleo");
+            fragmentManagerSuggestion.beginTransaction().replace(R.id.content_main_layout, fragmentSuggestion).commit();
 
         } else if (id == R.id.nav_about) {
 
