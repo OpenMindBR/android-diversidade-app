@@ -4,10 +4,47 @@
     android:layout_height="match_parent"
     tools:context="br.edu.ifce.engcomp.francis.diversidade.fragments.AboutFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="14dp"
+            android:id="@+id/descriptioon_project_text_view"
+            android:layout_gravity="center_vertical" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorPrimaryDark"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="10dp"
+            android:text="Desenvolvedores"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/title_devs_text_view"
+            android:layout_gravity="center_vertical" />
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/developers_recyler_view"
+            android:layout_marginTop="10dp"/>
+
+    </LinearLayout>
+
+
+
 
 </FrameLayout>

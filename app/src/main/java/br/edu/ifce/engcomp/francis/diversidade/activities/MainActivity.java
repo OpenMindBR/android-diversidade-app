@@ -1,6 +1,7 @@
 package br.edu.ifce.engcomp.francis.diversidade.activities;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import br.edu.ifce.engcomp.francis.diversidade.R;
+import br.edu.ifce.engcomp.francis.diversidade.fragments.AboutFragment;
 import br.edu.ifce.engcomp.francis.diversidade.fragments.DiscoveringFragment;
 import br.edu.ifce.engcomp.francis.diversidade.fragments.HealthFragment;
 import br.edu.ifce.engcomp.francis.diversidade.fragments.NucleusFragment;
@@ -108,8 +110,10 @@ public class MainActivity extends AppCompatActivity
             fragmentManagerSuggestion.beginTransaction().replace(R.id.content_main_layout, fragmentSuggestion).commit();
 
         } else if (id == R.id.nav_about) {
-            //Intent intent = new Intent(this, DetailNucleusActivity.class);
-            //startActivity(intent);
+            Fragment fragmentAbout = new AboutFragment();
+            FragmentManager fragmentManagerAbout = getFragmentManager();
+            toolbar.setTitle("Sobre");
+            fragmentManagerAbout.beginTransaction().replace(R.id.content_main_layout, fragmentAbout).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
