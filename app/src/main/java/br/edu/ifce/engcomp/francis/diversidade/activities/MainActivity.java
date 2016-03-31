@@ -1,10 +1,8 @@
 package br.edu.ifce.engcomp.francis.diversidade.activities;
 
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -110,8 +108,8 @@ public class MainActivity extends AppCompatActivity
             fragmentManagerSuggestion.beginTransaction().replace(R.id.content_main_layout, fragmentSuggestion).commit();
 
         } else if (id == R.id.nav_about) {
-            Intent intent = new Intent(this, DetailNucleusActivity.class);
-            startActivity(intent);
+            //Intent intent = new Intent(this, DetailNucleusActivity.class);
+            //startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

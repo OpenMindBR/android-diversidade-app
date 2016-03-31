@@ -36,8 +36,9 @@
         </activity>
         <activity
             android:name=".activities.DetailNucleusActivity"
-            android:label="@string/title_activity_detail_nucleus"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:label="Detalhes"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".activities.MainActivity"></activity>
     </application>
 
 </manifest>
