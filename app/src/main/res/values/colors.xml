@@ -10,4 +10,6 @@
     <color name="primaryTextColor">#212121</color>
     <color name="secondaryTextColor">#727272</color>
     <color name="colorDivider">#B6B6B6</color>
+
+    <color name="color_ripple_register">#FEF6C9</color>
 </resources>
