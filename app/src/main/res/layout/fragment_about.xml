@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginLeft="10dp"
-            android:text="Desenvolvedores"
+            android:text="@string/developers_text_view"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/title_devs_text_view"
             android:layout_gravity="center_vertical" />

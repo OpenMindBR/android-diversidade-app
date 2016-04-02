@@ -11,4 +11,45 @@
     <string name="title_activity_nucleus">NucleusActivity</string>
     <string name="title_activity_detail_nucleus">DetailNucleusActivity</string>
     <string name="title_activity_splash">SplashActivity</string>
+
+    <string name="title_toolbar_nucleus">Nucleus</string>
+    <string name="title_toolbar_discovery">Discovering Yourself</string>
+    <string name="title_toolbar_rights">Rights</string>
+    <string name="title_toolbar_health">Health</string>
+    <string name="title_toolbar_suggestion">Suggestion of Nucleus</string>
+    <string name="title_toolbar_about">About</string>
+
+    <string name="place_tab_informations">Informations</string>
+    <string name="place_tab_services">Services</string>
+    <string name="place_tab_comments">Comments</string>
+
+    <string name="message_fail_gps">Verify the GPS connection!</string>
+
+    <string name="developer_name_lastname">First name and Last name</string>
+    <string name="title_splash">Diversidade</string>
+    <string name="slogan_splash">Seja você, seja feliz!</string>
+    <string name="developers_text_view">Developers</string>
+
+    <string name="nucleus_name_sug">Name of nucleus or event</string>
+    <string name="hint_nucleus_name">Type a name</string>
+    <string name="nucleus_address_sug">Address</string>
+    <string name="hint_nucleus_address">Street, Number, District</string>
+    <string name="nucleus_cep_sug">CEP</string>
+    <string name="hint_only_numbers">Only numbers</string>
+    <string name="nucleus_state_sug">State</string>
+    <string name="hint_nucleus_state">Ex: CE</string>
+    <string name="nucleus_country_sug">Country</string>
+    <string name="hint_nucleus_country">Name of country</string>
+    <string name="nucleus_responsible_sug">Name of responsible person</string>
+    <string name="nucleus_phone_sug">Phone number</string>
+    <string name="nucleus_email_sug">E-mail</string>
+    <string name="hint_nucleus_email">Contact e-mail</string>
+    <string name="nucleus_services_sug">Services offered</string>
+    <string name="hint_separated_commas">Separated by commas</string>
+    <string name="nucleus_button_send">Send</string>
+
+    <string name="title_menu_nav">Diversidade: Seja você, seja feliz!</string>
+    <string name="site_menu_nav">diversidade.org</string>
+
+
 </resources>

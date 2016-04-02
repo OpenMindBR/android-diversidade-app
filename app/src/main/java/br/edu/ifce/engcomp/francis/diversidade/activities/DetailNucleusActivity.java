@@ -55,9 +55,9 @@ public class DetailNucleusActivity extends AppCompatActivity {
         TabHost.TabSpec servicesTab = this.placeTabHost.newTabSpec("servicesTab");
         TabHost.TabSpec commentsTab = this.placeTabHost.newTabSpec("commentsTab");
 
-        placeInformationTab.setIndicator("Informações");
-        servicesTab.setIndicator("Serviços");
-        commentsTab.setIndicator("Comentários");
+        placeInformationTab.setIndicator(getString(R.string.place_tab_informations));
+        servicesTab.setIndicator(getString(R.string.place_tab_services));
+        commentsTab.setIndicator(getString(R.string.place_tab_comments));
 
         this.placeTabHost.addTab(placeInformationTab, InformationsFragment.class, null);
         this.placeTabHost.addTab(servicesTab, ServicesFragment.class, null);
