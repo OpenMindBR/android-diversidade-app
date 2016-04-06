@@ -2,6 +2,7 @@ package br.edu.ifce.engcomp.francis.diversidade.activities;
 
 import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import br.edu.ifce.engcomp.francis.diversidade.R;
 import br.edu.ifce.engcomp.francis.diversidade.fragments.CommentsFragment;
@@ -19,6 +21,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class DetailNucleusActivity extends AppCompatActivity {
     private FragmentTabHost placeTabHost;
     private CircleImageView photoPlace;
+    FloatingActionButton addComment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +35,14 @@ public class DetailNucleusActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
+        this.addComment = (FloatingActionButton) findViewById(R.id.add_comment_fabutton);
+
         TextView nucleusName = (TextView) findViewById(R.id.nucleus_name);
         TextView nucleusCity = (TextView) findViewById(R.id.nucleus_city);
         photoPlace = (CircleImageView) findViewById(R.id.adapter_nucleus_image);
 
         this.initTabHost();
+        this.initAddComment();
 
     }
 
@@ -88,5 +94,17 @@ public class DetailNucleusActivity extends AppCompatActivity {
             tabTextView.setTextColor(tabTextColors);
         }
     }
+
+    private void initAddComment() {
+        this.addComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Intent intentAddPoliticosActivity = new Intent(getActivity(), AddPoliticiansActivity.class);
+                //startActivity(intentAddPoliticosActivity);
+                Toast.makeText(getBaseContext(), "Clicked", Toast.LENGTH_SHORT);
+            }
+        });
+    }
+
 
 }

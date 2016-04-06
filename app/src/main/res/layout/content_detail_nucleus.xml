@@ -20,15 +20,15 @@
         <ImageView
             android:id="@+id/place_cover_photo"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="120dp"
             android:contentDescription="Nucleus Cover Description"
-            android:background="@color/accent_material_dark"
+            android:background="@color/colorLightPrimary"
             android:scaleType="centerCrop"
             android:elevation="3dp" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/adapter_nucleus_image"
-            android:src="@drawable/ic_nucleus"
+            android:src="@drawable/ic_gay_place"
             app:border_width="1dp"
             app:border_color="@color/textPrimaryColor"
             android:elevation="4dp"
@@ -113,7 +113,19 @@
             <FrameLayout
                 android:id="@android:id/tabcontent"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"></FrameLayout>
+                android:layout_height="match_parent">
+
+                <android.support.design.widget.FloatingActionButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/fab_margin"
+                    android:layout_gravity="bottom|end"
+                    android:elevation="6dp"
+                    android:tint="@color/textPrimaryColor"
+                    android:id="@+id/add_comment_fabutton"
+                    android:src="@drawable/ic_comment"/>
+
+            </FrameLayout>
 
         </LinearLayout>
 

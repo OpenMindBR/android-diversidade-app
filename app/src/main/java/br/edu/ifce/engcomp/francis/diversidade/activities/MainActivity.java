@@ -104,6 +104,9 @@ public class MainActivity extends AppCompatActivity
             FragmentManager fragmentManagerAbout = getFragmentManager();
             toolbar.setTitle(getString(R.string.title_toolbar_about));
             fragmentManagerAbout.beginTransaction().replace(R.id.content_main_layout, fragmentAbout).commit();
+
+            //Intent intent = new Intent(getBaseContext(), DetailNucleusActivity.class);
+            //startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
