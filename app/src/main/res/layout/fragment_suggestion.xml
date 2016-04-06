@@ -38,7 +38,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="Nome do Núcleo ou Evento"
+                        android:text="@string/nucleus_name_sug"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="5dp" />
 
@@ -49,13 +49,13 @@
                         android:ems="10"
                         android:id="@+id/nucleus_name_edit_text"
                         android:textColor="@color/colorPrimary"
-                        android:hint="Digite o nome" />
+                        android:hint="@string/hint_nucleus_name" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="Endereço"
+                        android:text="@string/nucleus_address_sug"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="5dp" />
 
@@ -66,13 +66,13 @@
                         android:ems="10"
                         android:id="@+id/nucleus_address_edit_text"
                         android:textColor="@color/colorPrimary"
-                        android:hint="Logradouro, Número, Bairro" />
+                        android:hint="@string/hint_nucleus_address" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="CEP"
+                        android:text="@string/nucleus_cep_sug"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="5dp" />
 
@@ -83,7 +83,7 @@
                         android:ems="10"
                         android:id="@+id/nucleus_cep_edit_text"
                         android:textColor="@color/colorPrimary"
-                        android:hint="Apenas números" />
+                        android:hint="@string/hint_only_numbers" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -99,7 +99,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textAppearance="?android:attr/textAppearanceSmall"
-                                android:text="Estado"
+                                android:text="@string/nucleus_state_sug"
                                 android:layout_marginTop="10dp"
                                 android:layout_marginBottom="5dp" />
 
@@ -110,7 +110,7 @@
                                 android:ems="6"
                                 android:id="@+id/nucleus_estado_edit_text"
                                 android:textColor="@color/colorPrimary"
-                                android:hint="Ex: CE" />
+                                android:hint="@string/hint_nucleus_state" />
 
                         </LinearLayout>
 
@@ -123,7 +123,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textAppearance="?android:attr/textAppearanceSmall"
-                                android:text="País"
+                                android:text="@string/nucleus_country_sug"
                                 android:layout_marginTop="10dp"
                                 android:layout_marginBottom="5dp" />
 
@@ -134,7 +134,7 @@
                                 android:ems="10"
                                 android:id="@+id/nucleus_pais_edit_text"
                                 android:textColor="@color/colorPrimary"
-                                android:hint="Nome do país" />
+                                android:hint="@string/hint_nucleus_country" />
 
                         </LinearLayout>
 
@@ -144,7 +144,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="Nome do Responável"
+                        android:text="@string/nucleus_responsible_sug"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="5dp" />
 
@@ -155,13 +155,13 @@
                         android:ems="10"
                         android:id="@+id/nucleus_responsavel_edit_text"
                         android:textColor="@color/colorPrimary"
-                        android:hint="Nome e sobrenome" />
+                        android:hint="@string/developer_name_lastname" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="Telefone"
+                        android:text="@string/nucleus_phone_sug"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="5dp" />
 
@@ -172,13 +172,13 @@
                         android:ems="10"
                         android:id="@+id/nucleus_telefone_edit_text"
                         android:textColor="@color/colorPrimary"
-                        android:hint="Apenas números" />
+                        android:hint="@string/hint_only_numbers" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="Email"
+                        android:text="@string/nucleus_email_sug"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="5dp" />
 
@@ -189,13 +189,13 @@
                         android:ems="10"
                         android:id="@+id/nucleus_email_edit_text"
                         android:textColor="@color/colorPrimary"
-                        android:hint="Email para contato" />
+                        android:hint="@string/nucleus_email_sug" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="Serviços ofertados"
+                        android:text="@string/nucleus_services_sug"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="5dp" />
 
@@ -206,7 +206,7 @@
                         android:ems="10"
                         android:id="@+id/nucleus_servicos_edit_text"
                         android:textColor="@color/colorPrimary"
-                        android:hint="Separar por vírgulas" />
+                        android:hint="@string/hint_separated_commas" />
 
                 </LinearLayout>
 
@@ -218,7 +218,7 @@
                 android:background="@color/colorPrimary"
                 android:textColor="@color/background_material_light"
                 android:layout_margin="10dp"
-                android:text="Enviar"
+                android:text="@string/nucleus_button_send"
                 android:id="@+id/enviarButton" />
 
         </LinearLayout>

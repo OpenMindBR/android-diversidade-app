@@ -5,27 +5,27 @@
         <item
             android:id="@+id/nav_nucleus"
             android:icon="@drawable/ic_nucleus"
-            android:title="Núcleos" />
+            android:title="@string/title_toolbar_nucleus" />
         <item
             android:id="@+id/nav_discovery"
             android:icon="@drawable/ic_discovery"
-            android:title="Descobrindo-se" />
+            android:title="@string/title_toolbar_discovery" />
         <item
             android:id="@+id/nav_rights"
             android:icon="@drawable/ic_rights"
-            android:title="Direitos" />
+            android:title="@string/title_toolbar_rights" />
         <item
             android:id="@+id/nav_health"
             android:icon="@drawable/ic_health"
-            android:title="Saúde" />
+            android:title="@string/title_toolbar_health" />
         <item
             android:id="@+id/nav_sugestion"
             android:icon="@drawable/ic_sugestion"
-            android:title="Sugestão de Núcleo" />
+            android:title="@string/title_toolbar_suggestion" />
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_about"
-            android:title="Sobre" />
+            android:title="@string/title_toolbar_about" />
     </group>
 
 </menu>

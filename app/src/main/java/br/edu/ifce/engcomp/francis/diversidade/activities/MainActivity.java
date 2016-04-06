@@ -39,6 +39,12 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        if (savedInstanceState == null) {
+            Fragment fragmentNucleus = new NucleusFragment();
+            android.app.FragmentManager fragmentManagerNucleus = getFragmentManager();
+            fragmentManagerNucleus.beginTransaction().add(R.id.content_main_layout, fragmentNucleus).commit();
+        }
     }
 
     @Override
@@ -59,22 +65,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
@@ -82,37 +72,37 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_nucleus) {
             Fragment fragmentNucleus = new NucleusFragment();
             android.app.FragmentManager fragmentManagerNucleus = getFragmentManager();
-            toolbar.setTitle("Núcleos");
+            toolbar.setTitle(getString(R.string.title_toolbar_nucleus));
             fragmentManagerNucleus.beginTransaction().replace(R.id.content_main_layout, fragmentNucleus).commit();
 
         } else if (id == R.id.nav_discovery) {
             Fragment fragmentDiscovering = new DiscoveringFragment();
             android.app.FragmentManager fragmentManagerDiscovering = getFragmentManager();
-            toolbar.setTitle("Descobrindo-se");
+            toolbar.setTitle(getString(R.string.title_toolbar_discovery));
             fragmentManagerDiscovering.beginTransaction().replace(R.id.content_main_layout, fragmentDiscovering).commit();
 
         } else if (id == R.id.nav_rights) {
             Fragment fragmentRights = new RightsFragment();
             android.app.FragmentManager fragmentManagerRights = getFragmentManager();
-            toolbar.setTitle("Direitos");
+            toolbar.setTitle(getString(R.string.title_toolbar_rights));
             fragmentManagerRights.beginTransaction().replace(R.id.content_main_layout, fragmentRights).commit();
 
         } else if (id == R.id.nav_health) {
             Fragment fragmentHealth = new HealthFragment();
             android.app.FragmentManager fragmentManagerHealth = getFragmentManager();
-            toolbar.setTitle("Saúde");
+            toolbar.setTitle(getString(R.string.title_toolbar_health));
             fragmentManagerHealth.beginTransaction().replace(R.id.content_main_layout, fragmentHealth).commit();
 
         } else if (id == R.id.nav_sugestion) {
             Fragment fragmentSuggestion = new SuggestionFragment();
             android.app.FragmentManager fragmentManagerSuggestion = getFragmentManager();
-            toolbar.setTitle("Sugestão de Núcleo");
+            toolbar.setTitle(getString(R.string.title_toolbar_suggestion));
             fragmentManagerSuggestion.beginTransaction().replace(R.id.content_main_layout, fragmentSuggestion).commit();
 
         } else if (id == R.id.nav_about) {
             Fragment fragmentAbout = new AboutFragment();
             FragmentManager fragmentManagerAbout = getFragmentManager();
-            toolbar.setTitle("Sobre");
+            toolbar.setTitle(getString(R.string.title_toolbar_about));
             fragmentManagerAbout.beginTransaction().replace(R.id.content_main_layout, fragmentAbout).commit();
         }
 
