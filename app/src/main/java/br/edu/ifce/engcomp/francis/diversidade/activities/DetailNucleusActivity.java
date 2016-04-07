@@ -1,5 +1,6 @@
 package br.edu.ifce.engcomp.francis.diversidade.activities;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -99,9 +100,9 @@ public class DetailNucleusActivity extends AppCompatActivity {
         this.addComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intentAddPoliticosActivity = new Intent(getActivity(), AddPoliticiansActivity.class);
-                //startActivity(intentAddPoliticosActivity);
-                Toast.makeText(getBaseContext(), "Clicked", Toast.LENGTH_SHORT);
+                Intent intentCommentActivity = new Intent(getBaseContext(), CommentActivity.class);
+                startActivity(intentCommentActivity);
+                //Toast.makeText(getBaseContext(), "Clicked", Toast.LENGTH_SHORT);
             }
         });
     }
