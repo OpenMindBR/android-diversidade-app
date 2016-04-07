@@ -53,5 +53,6 @@
     <string name="action_send">send_comment</string>
     <string name="readers_review_toolbar_subtitle_plural">caracters</string>
     <string name="readers_review_toolbar_subtitle">caracter</string>
+    <string name="title_activity_detail_developer">Developer</string>
 
 </resources>
