@@ -1,4 +1,4 @@
-package br.edu.ifce.engcomp.francis.diversidade.Fragments;
+package br.edu.ifce.engcomp.francis.diversidade.fragments;
 
 
 import android.app.Fragment;
