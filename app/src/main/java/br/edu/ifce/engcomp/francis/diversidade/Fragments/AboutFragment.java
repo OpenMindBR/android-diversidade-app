@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -111,7 +110,6 @@ public class AboutFragment extends Fragment implements RecyclerViewOnClickListen
 
     @Override
     public void onClickListener(View view, int position){
-        Log.i("TESTE-INTENT", dataSource.get(position).getName());
         Intent intent = new Intent(getActivity(), DetailDeveloperActivity.class);
         intent.putExtra("INFOS_DEVELOPER", dataSource.get(position));
         startActivity(intent);
