@@ -54,5 +54,7 @@
     <string name="readers_review_toolbar_subtitle_plural">caracters</string>
     <string name="readers_review_toolbar_subtitle">caracter</string>
     <string name="title_activity_detail_developer">Developer</string>
+    <string name="information_fragment_address_title">Address</string>
+    <string name="information_fragment_business_hours">Bussiness hours</string>
 
 </resources>
