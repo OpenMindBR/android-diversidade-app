@@ -11,12 +11,11 @@ import android.view.View;
 import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import br.edu.ifce.engcomp.francis.diversidade.Fragments.CommentsFragment;
+import br.edu.ifce.engcomp.francis.diversidade.Fragments.InformationsFragment;
+import br.edu.ifce.engcomp.francis.diversidade.Fragments.ServicesFragment;
 import br.edu.ifce.engcomp.francis.diversidade.R;
-import br.edu.ifce.engcomp.francis.diversidade.fragments.CommentsFragment;
-import br.edu.ifce.engcomp.francis.diversidade.fragments.InformationsFragment;
-import br.edu.ifce.engcomp.francis.diversidade.fragments.ServicesFragment;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DetailNucleusActivity extends AppCompatActivity {

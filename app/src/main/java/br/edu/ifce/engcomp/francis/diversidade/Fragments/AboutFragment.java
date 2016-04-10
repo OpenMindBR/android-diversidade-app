@@ -1,9 +1,9 @@
-package br.edu.ifce.engcomp.francis.diversidade.fragments;
+package br.edu.ifce.engcomp.francis.diversidade.Fragments;
 
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,18 +11,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import br.edu.ifce.engcomp.francis.diversidade.R;
 import br.edu.ifce.engcomp.francis.diversidade.activities.DetailDeveloperActivity;
 import br.edu.ifce.engcomp.francis.diversidade.adapters.AboutRecyclerViewAdapter;
-import br.edu.ifce.engcomp.francis.diversidade.adapters.TextRecyclerViewAdapter;
 import br.edu.ifce.engcomp.francis.diversidade.interfaces.RecyclerViewOnClickListenerHack;
 import br.edu.ifce.engcomp.francis.diversidade.model.Contact;
 import br.edu.ifce.engcomp.francis.diversidade.model.Developer;
-import br.edu.ifce.engcomp.francis.diversidade.model.TextBlog;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,6 +33,16 @@ public class AboutFragment extends Fragment implements RecyclerViewOnClickListen
 
     public AboutFragment() {
         // Required empty public constructor
+    }
+
+    public String initDescription(){
+        String textDescription = "O aplicativo Diversidade é fruto da disciplina Projeto Social do Instituto Federal de Educação, " +
+                "Ciência e Tecnologia do Ceará. A proposta do aplicativo é mapear locais e eventos que oferecem serviços gratuitos de " +
+                "apoio à comunidade LGBT no Ceará. Esses serviços podem se encaixar nas categorias principais: saúde, educação, direitos, " +
+                "lazer, cultura, socialização e convívio. Esperamos que essa iniciativa contribua para a inserção das pessoas LGBT em sua " +
+                "comunidade, para que assim todo o grupo se fortaleça.";
+
+        return textDescription;
     }
 
     public ArrayList<Developer> generateDataSource(){
@@ -84,6 +92,9 @@ public class AboutFragment extends Fragment implements RecyclerViewOnClickListen
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_about, container, false);
+
+        TextView descriptionTextView = (TextView) view.findViewById(R.id.descriptioon_project_text_view);
+        descriptionTextView.setText(initDescription());
 
         AboutRecyclerViewAdapter adapter = new AboutRecyclerViewAdapter(dataSource, getActivity().getApplicationContext());
         adapter.setRecycleViewOnClickListenerHack(this);
