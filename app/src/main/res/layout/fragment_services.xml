@@ -6,5 +6,11 @@
     android:name="com.google.android.gms.maps.SupportMapFragment"
     tools:context="br.edu.ifce.engcomp.francis.diversidade.fragments.ServicesFragment">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/services_nucleus_list"
+        android:scrollbars="vertical"
+        android:layout_height="fill_parent"
+        android:layout_width="match_parent"/>
+
 
 </FrameLayout>
