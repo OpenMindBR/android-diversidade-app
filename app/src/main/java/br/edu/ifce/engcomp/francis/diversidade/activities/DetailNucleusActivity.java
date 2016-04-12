@@ -16,17 +16,29 @@ import br.edu.ifce.engcomp.francis.diversidade.Fragments.CommentsFragment;
 import br.edu.ifce.engcomp.francis.diversidade.Fragments.InformationsFragment;
 import br.edu.ifce.engcomp.francis.diversidade.Fragments.ServicesFragment;
 import br.edu.ifce.engcomp.francis.diversidade.R;
+import br.edu.ifce.engcomp.francis.diversidade.model.Developer;
+import br.edu.ifce.engcomp.francis.diversidade.model.Nucleus;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DetailNucleusActivity extends AppCompatActivity {
     private FragmentTabHost placeTabHost;
     private CircleImageView photoPlace;
     FloatingActionButton addComment;
+    TextView nucleusName;
+    TextView nucleusCity;
+    Nucleus nucleus;
+
+    public void initDataSource() {
+        Intent currentIntent = getIntent();
+        nucleus = (Nucleus) currentIntent.getSerializableExtra("INFOS_NUCLEUS");
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_nucleus);
+
+        initDataSource();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         if(toolbar!=null){
@@ -37,11 +49,12 @@ public class DetailNucleusActivity extends AppCompatActivity {
 
         this.addComment = (FloatingActionButton) findViewById(R.id.add_comment_fabutton);
 
-        TextView nucleusName = (TextView) findViewById(R.id.nucleus_name);
-        TextView nucleusCity = (TextView) findViewById(R.id.nucleus_city);
+        nucleusName = (TextView) findViewById(R.id.nucleus_name);
+        nucleusCity = (TextView) findViewById(R.id.nucleus_city);
         photoPlace = (CircleImageView) findViewById(R.id.adapter_nucleus_image);
 
         this.initTabHost();
+        this.initComponents();
         this.initAddComment();
 
     }
@@ -50,6 +63,11 @@ public class DetailNucleusActivity extends AppCompatActivity {
     public void onDestroy() {
         super.onDestroy();
         this.placeTabHost = null;
+    }
+
+    private void initComponents() {
+        nucleusName.setText(nucleus.getName());
+        nucleusCity.setText(nucleus.getAddress().getCity());
     }
 
     private void initTabHost() {
@@ -101,7 +119,6 @@ public class DetailNucleusActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intentCommentActivity = new Intent(getBaseContext(), CommentActivity.class);
                 startActivity(intentCommentActivity);
-                //Toast.makeText(getBaseContext(), "Clicked", Toast.LENGTH_SHORT);
             }
         });
     }
