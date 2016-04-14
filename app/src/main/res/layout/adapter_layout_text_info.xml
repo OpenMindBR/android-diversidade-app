@@ -43,6 +43,13 @@
                     android:layout_marginLeft="4dp"
                     android:autoText="false" />
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:background="@color/primary_dark_material_light" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
