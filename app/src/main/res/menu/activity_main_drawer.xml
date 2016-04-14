@@ -19,10 +19,6 @@
             android:icon="@drawable/ic_health"
             android:title="@string/title_toolbar_health" />
         <item
-            android:id="@+id/nav_sugestion"
-            android:icon="@drawable/ic_suggestion"
-            android:title="@string/title_toolbar_suggestion" />
-        <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_about"
             android:title="@string/title_toolbar_about" />
