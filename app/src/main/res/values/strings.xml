@@ -56,5 +56,6 @@
     <string name="title_activity_detail_developer">Developer</string>
     <string name="information_fragment_address_title">Address</string>
     <string name="information_fragment_business_hours">Bussiness hours</string>
+    <string name="information_fragment_contacts">Contacts</string>
 
 </resources>
