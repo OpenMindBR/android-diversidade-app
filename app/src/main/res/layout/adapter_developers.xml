@@ -34,6 +34,13 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
+                    android:layout_marginLeft="15dp"
+                    android:id="@+id/ic_gmail"
+                    android:src="@drawable/ic_gmail" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_marginLeft="25dp"
                     android:id="@+id/ic_facebook"
                     android:src="@drawable/ic_facebook" />

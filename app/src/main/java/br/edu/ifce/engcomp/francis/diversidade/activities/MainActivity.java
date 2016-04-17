@@ -17,7 +17,6 @@ import br.edu.ifce.engcomp.francis.diversidade.Fragments.DiscoveringFragment;
 import br.edu.ifce.engcomp.francis.diversidade.Fragments.HealthFragment;
 import br.edu.ifce.engcomp.francis.diversidade.Fragments.NucleusFragment;
 import br.edu.ifce.engcomp.francis.diversidade.Fragments.RightsFragment;
-import br.edu.ifce.engcomp.francis.diversidade.Fragments.SuggestionFragment;
 import br.edu.ifce.engcomp.francis.diversidade.R;
 
 public class MainActivity extends AppCompatActivity
@@ -93,20 +92,11 @@ public class MainActivity extends AppCompatActivity
             toolbar.setTitle(getString(R.string.title_toolbar_health));
             fragmentManagerHealth.beginTransaction().replace(R.id.content_main_layout, fragmentHealth).commit();
 
-        } else if (id == R.id.nav_sugestion) {
-            Fragment fragmentSuggestion = new SuggestionFragment();
-            android.app.FragmentManager fragmentManagerSuggestion = getFragmentManager();
-            toolbar.setTitle(getString(R.string.title_toolbar_suggestion));
-            fragmentManagerSuggestion.beginTransaction().replace(R.id.content_main_layout, fragmentSuggestion).commit();
-
         } else if (id == R.id.nav_about) {
             Fragment fragmentAbout = new AboutFragment();
             FragmentManager fragmentManagerAbout = getFragmentManager();
             toolbar.setTitle(getString(R.string.title_toolbar_about));
             fragmentManagerAbout.beginTransaction().replace(R.id.content_main_layout, fragmentAbout).commit();
-
-            /*Intent intent = new Intent(getBaseContext(), DetailNucleusActivity.class);
-            startActivity(intent);*/
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

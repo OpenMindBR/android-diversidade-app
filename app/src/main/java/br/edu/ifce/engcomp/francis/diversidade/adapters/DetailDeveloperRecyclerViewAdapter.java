@@ -48,16 +48,26 @@ public class DetailDeveloperRecyclerViewAdapter extends RecyclerView.Adapter<Det
         Contact contact = this.dataSource.get(position);
         holder.nameTextView.setText(contact.getPath());
 
-        if (contact.getMedia().equals("facebook"))
-            holder.contactImageView.setImageResource(R.drawable.ic_facebook);
-        else if (contact.getMedia().equals("twitter"))
-            holder.contactImageView.setImageResource(R.drawable.ic_twitter);
-        else if (contact.getMedia().equals("instagram"))
-            holder.contactImageView.setImageResource(R.drawable.ic_instagram);
-        else if (contact.getMedia().equals("github"))
-            holder.contactImageView.setImageResource(R.drawable.ic_github);
-        else
-            holder.contactImageView.setImageResource(R.drawable.ic_menu_manage);
+        switch (contact.getMedia()) {
+            case "gmail":
+                holder.contactImageView.setImageResource(R.drawable.ic_gmail);
+                break;
+            case "facebook":
+                holder.contactImageView.setImageResource(R.drawable.ic_facebook);
+                break;
+            case "twitter":
+                holder.contactImageView.setImageResource(R.drawable.ic_twitter);
+                break;
+            case "instagram":
+                holder.contactImageView.setImageResource(R.drawable.ic_instagram);
+                break;
+            case "github":
+                holder.contactImageView.setImageResource(R.drawable.ic_github);
+                break;
+            default:
+                holder.contactImageView.setImageResource(R.drawable.ic_gay_place);
+                break;
+        }
     }
 
     @Override
