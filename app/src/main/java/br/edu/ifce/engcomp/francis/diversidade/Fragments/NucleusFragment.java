@@ -14,6 +14,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -40,6 +46,8 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
     private MapView mapView;
     public NucleusOperations nucleusOperations = new NucleusOperations();
     Nucleus teste1 = new Nucleus();
+    RequestQueue queue;
+    String urlNucleusState ="http://diversidade-cloudsocial.rhcloud.com/api/v1/centers?state";
 
     LocationListener listenerGPS = new LocationListener() {
         @Override
@@ -75,6 +83,27 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
         teste1.setHour(new HourNucleus("Segunda-Sexta", "8h-18h"));
     }
 
+    //Requisitar núcleos do estado
+    public void doRequest(){
+        // Instantiate the RequestQueue.
+        queue = Volley.newRequestQueue(getActivity());
+
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, urlNucleusState, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //Executar ação
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Erro
+            }
+        });
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -93,7 +122,8 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
         MapsInitializer.initialize(this.getActivity());
 
         initMap();
-        initTest();
+        doRequest();
+        //initTest();
 
         return view;
     }
