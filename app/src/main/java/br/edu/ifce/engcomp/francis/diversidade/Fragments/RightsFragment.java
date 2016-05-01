@@ -34,7 +34,7 @@ public class RightsFragment extends Fragment implements RecyclerViewOnClickListe
     public ArrayList<TextBlog> generateDataSourceMock(){
         ArrayList<TextBlog> textBlogArrayList = new ArrayList<>();
 
-        TextBlog teste1 = new TextBlog();
+        /*TextBlog teste1 = new TextBlog();
         teste1.setTitle("DEPOIS DE PERDER ESPOSA EM ACIDENTE, VIÚVA PROTESTA EM FAVOR DO CASAMENTO IGUALITÁRIO");
         teste1.setContent("A australiana Lara Ryan publicou nas redes sociais uma carta aberta em protesto contra as atribulações " +
                 "por que passou durante a morte da esposa e as dificuldades para garantir o futuro de sua família porque " +
@@ -51,7 +51,7 @@ public class RightsFragment extends Fragment implements RecyclerViewOnClickListe
         teste2.setCategory("R");
 
         textBlogArrayList.add(teste1);
-        textBlogArrayList.add(teste2);
+        textBlogArrayList.add(teste2);*/
 
         return textBlogArrayList;
     }

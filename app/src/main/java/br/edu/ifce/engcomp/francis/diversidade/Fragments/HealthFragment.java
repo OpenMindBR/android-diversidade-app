@@ -34,7 +34,7 @@ public class HealthFragment extends Fragment implements RecyclerViewOnClickListe
     public ArrayList<TextBlog> generateDataSourceMock(){
         ArrayList<TextBlog> textBlogArrayList = new ArrayList<>();
 
-        TextBlog teste1 = new TextBlog();
+        /*TextBlog teste1 = new TextBlog();
         teste1.setTitle("Governo lança política de saúde para público LGBT no SUS");
         teste1.setContent("O Ministério da Saúde aproveitou a 14º Conferência Nacional de Saúde para disparar ações voltadas ao público " +
                 "LGBT. Uma delas foi a assinatura pelo ministro da Saúde, Alexandre Padilha, de uma portaria que institui a Política " +
@@ -52,7 +52,7 @@ public class HealthFragment extends Fragment implements RecyclerViewOnClickListe
         teste2.setCategory("H");
 
         textBlogArrayList.add(teste1);
-        textBlogArrayList.add(teste2);
+        textBlogArrayList.add(teste2);*/
 
         return textBlogArrayList;
     }
