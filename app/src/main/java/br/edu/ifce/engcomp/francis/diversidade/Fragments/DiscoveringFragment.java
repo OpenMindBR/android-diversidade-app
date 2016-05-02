@@ -71,9 +71,6 @@ public class DiscoveringFragment extends Fragment implements RecyclerViewOnClick
                                 String category = jsonObject.getString("category");
 
                                 dataSource.add(new TextBlog(title, text, "http://www.google.com", category));
-                                if (!dataSource.isEmpty()){
-                                    Log.i("RESPONSE", String.valueOf(dataSource.size()));
-                                }
 
                             } catch (JSONException e) {
                                 e.printStackTrace();

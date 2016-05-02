@@ -122,8 +122,8 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
         MapsInitializer.initialize(this.getActivity());
 
         initMap();
-        doRequest();
-        //initTest();
+        //doRequest();
+        initTest();
 
         return view;
     }

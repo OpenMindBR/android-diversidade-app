@@ -62,7 +62,6 @@ public class TextRecyclerViewAdapter extends RecyclerView.Adapter<TextRecyclerVi
 
         holder.textTitleTextView.setText(textBlog.getTitle());
         holder.textContentTextView.setText(textBlog.getContent());
-        holder.textSourceTextView.setText(textBlog.getSource());
     }
 
     @Override
