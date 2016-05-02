@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:name="com.google.android.gms.maps.SupportMapFragment"
-    tools:context="br.edu.ifce.engcomp.francis.diversidade.fragments.NucleusFragment">
+    tools:context="br.edu.ifce.engcomp.francis.diversidade.Fragments.NucleusFragment">
 
     <com.google.android.gms.maps.MapView android:id="@+id/map_nucleus"
         android:layout_width="wrap_content"
