@@ -2,12 +2,16 @@ package br.edu.ifce.engcomp.francis.diversidade.Fragments;
 
 
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +22,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -30,12 +35,24 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+
 import br.edu.ifce.engcomp.francis.diversidade.R;
 import br.edu.ifce.engcomp.francis.diversidade.activities.DetailNucleusActivity;
 import br.edu.ifce.engcomp.francis.diversidade.miscellaneous.NucleusOperations;
 import br.edu.ifce.engcomp.francis.diversidade.model.AddressNucleus;
 import br.edu.ifce.engcomp.francis.diversidade.model.HourNucleus;
 import br.edu.ifce.engcomp.francis.diversidade.model.Nucleus;
+import br.edu.ifce.engcomp.francis.diversidade.model.Service;
+import br.edu.ifce.engcomp.francis.diversidade.model.TextBlog;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -45,9 +62,8 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
     private GoogleMap mapPlace;
     private MapView mapView;
     public NucleusOperations nucleusOperations = new NucleusOperations();
-    Nucleus teste1 = new Nucleus();
-    RequestQueue queue;
-    String urlNucleusState ="http://diversidade-cloudsocial.rhcloud.com/api/v1/centers?state";
+    public HashMap<Integer, Nucleus> nucleusHashMap = new HashMap<>();
+    //Nucleus teste1 = new Nucleus();
 
     LocationListener listenerGPS = new LocationListener() {
         @Override
@@ -76,32 +92,61 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
         // Required empty public constructor
     }
 
-    public void initTest() {
+    /*public void initTest() {
         teste1.setName("GRAB");
         teste1.setAddress(new AddressNucleus("R. Teresa Cristina", "1050", "Centro", "Fortaleza", "CE", "Brasil", "60015-141",
                 -3.7297003, -38.5398319));
         teste1.setHour(new HourNucleus("Segunda-Sexta", "8h-18h"));
-    }
+    }*/
 
     //Requisitar núcleos do estado
-    public void doRequest(){
+    public void doRequest(String estado){
+        ArrayList<Nucleus> nucleusArrayList = new ArrayList<>();
         // Instantiate the RequestQueue.
+        RequestQueue queue;
         queue = Volley.newRequestQueue(getActivity());
+        String url ="http://diversidade-cloudsocial.rhcloud.com/api/v1/centers?state=";
+        String urlSigla = "";
+        String urlNucleusState = "";
+
+        urlSigla = nucleusOperations.choseState(estado);
+
+        urlNucleusState = url + urlSigla;
 
         // Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, urlNucleusState, new Response.Listener<String>() {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(urlNucleusState, new Response.Listener<JSONArray>() {
             @Override
-            public void onResponse(String response) {
-                //Executar ação
+            public void onResponse(JSONArray response) {
+                Log.i("RESPONSE", response.toString());
+
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject jsonObject = response.getJSONObject(i);
+                        int id = jsonObject.getInt("id");
+                        String name = jsonObject.getString("name");
+                        String address =  jsonObject.getString("address");
+                        long latitude = jsonObject.getLong("latitude");
+                        long longitude = jsonObject.getLong("longitude");
+                        String hours =  jsonObject.getString("operating_hours");
+                        String services = jsonObject.getString("services");
+
+                        nucleusHashMap.put(i, new Nucleus(id, name, latitude, longitude));
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 //Erro
+                Log.i("RESPONSE", error.getCause().toString());
             }
         });
         // Add the request to the RequestQueue.
-        queue.add(stringRequest);
+        queue.add(jsonArrayRequest);
     }
 
 
@@ -123,7 +168,7 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
 
         initMap();
         //doRequest();
-        initTest();
+        //initTest();
 
         return view;
     }
@@ -132,13 +177,14 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
         mapPlace.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-3.7441914, -38.5380658), 15));
 
         verifyGPS();
-        nucleusOperations.initMarkers(mapPlace);
-        eventMarkers();
+        //nucleusOperations.initMarkers(mapPlace);
+        //eventMarkers();
     }
 
     private void verifyGPS(){
-        long timeUpdate = 3000;
+        long timeUpdate = 0;
         float distance = 0;
+        LatLng myPosition = null;
 
         LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
@@ -146,10 +192,48 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, timeUpdate, distance, listenerGPS);
 
         Location locationUser = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        Location locationUser2 = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
-        if(locationUser == null){
+        if(locationUser!=null){
+            myPosition = new LatLng((float) locationUser.getLatitude(), (float) locationUser.getLongitude());
+        }
+        else if(locationUser2!=null){
+            myPosition = new LatLng((float) locationUser2.getLatitude(), (float) locationUser2.getLongitude());
+        }
+        else{
             Toast.makeText(getActivity(), "Verifique a conexão do GPS!", Toast.LENGTH_LONG).show();
+        }
 
+        if(myPosition!=null){
+            Geocoder geocoderCity = new Geocoder(getActivity(), Locale.getDefault());
+            List<Address> addresses;
+            String state = null;
+
+            try {
+                addresses = geocoderCity.getFromLocation(myPosition.latitude, myPosition.longitude, 1);
+                if (addresses.size() > 0) {
+                    state = addresses.get(0).getAdminArea();
+
+                    if (state!=null){
+
+                        ProgressDialog progressDialog = new ProgressDialog(getActivity());
+                        progressDialog.setMessage("Carregando...");
+                        progressDialog.show();
+
+                        doRequest(state);
+
+                        progressDialog.dismiss();
+                    }
+                    else {
+                        Toast.makeText(getActivity(), "Verifique a conexão do GPS!", Toast.LENGTH_LONG);
+                    }
+
+                }
+            } catch (IOException e) {
+                e.fillInStackTrace();
+            }
+        }else {
+            Toast.makeText(getActivity(), "Verifique a conexão do GPS!", Toast.LENGTH_LONG);
         }
     }
 
@@ -169,7 +253,7 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
                     position_2 = marker.getPosition();
                     if (position_1.equals(position_2)) {
                         Intent intent = new Intent(getActivity(), DetailNucleusActivity.class);
-                        intent.putExtra("INFOS_NUCLEUS", teste1);
+                        //intent.putExtra("INFOS_NUCLEUS", teste1);
                         startActivity(intent);
                     } else {
                         position_1 = marker.getPosition();

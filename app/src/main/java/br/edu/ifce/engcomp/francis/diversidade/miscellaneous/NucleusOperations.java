@@ -32,4 +32,94 @@ public class NucleusOperations {
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)));
         markerEvent.setSnippet("Clique mais uma vez para conhecer o evento");
     }
+
+    public String choseState(String state){
+        String sigla = "";
+
+        switch (state){
+            case "Acre":
+                sigla = "AC";
+                break;
+            case "Alagoas":
+                sigla = "AL";
+                break;
+            case "Amapá":
+                sigla = "AP";
+                break;
+            case "Amazonas":
+                sigla = "AM";
+                break;
+            case "Bahia":
+                sigla = "BA";
+                break;
+            case "Ceará":
+                sigla = "CE";
+                break;
+            case "Distrito Federal":
+                sigla = "DF";
+                break;
+            case "Espírito Santo":
+                sigla = "ES";
+                break;
+            case "Goiás":
+                sigla = "GO";
+                break;
+            case "Maranhão":
+                sigla = "MA";
+                break;
+            case "Mato Grosso":
+                sigla = "MT";
+                break;
+            case "Mato Grosso do Sul":
+                sigla = "MS";
+                break;
+            case "Minas Gerais":
+                sigla = "MG";
+                break;
+            case "Pará":
+                sigla = "PA";
+                break;
+            case "Paraíba":
+                sigla = "PB";
+                break;
+            case "Paraná":
+                sigla = "PR";
+                break;
+            case "Pernambuco":
+                sigla = "PE";
+                break;
+            case "Piauí":
+                sigla = "PI";
+                break;
+            case "Rio de Janeiro":
+                sigla = "RJ";
+                break;
+            case "Rio Grande do Norte":
+                sigla = "RN";
+                break;
+            case "Rio Grande do Sul":
+                sigla = "RS";
+                break;
+            case "Rondônia":
+                sigla = "RO";
+                break;
+            case "Roraima":
+                sigla = "RR";
+                break;
+            case "Santa Catarina":
+                sigla = "SC";
+                break;
+            case "São Paulo":
+                sigla = "SP";
+                break;
+            case "Sergipe":
+                sigla = "SE";
+                break;
+            case "Tocatins":
+                sigla = "TO";
+                break;
+        }
+
+        return sigla;
+    }
 }
