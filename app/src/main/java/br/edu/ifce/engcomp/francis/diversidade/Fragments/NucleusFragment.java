@@ -63,7 +63,7 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
     private MapView mapView;
     public NucleusOperations nucleusOperations = new NucleusOperations();
     public HashMap<Integer, Nucleus> nucleusHashMap = new HashMap<>();
-    //Nucleus teste1 = new Nucleus();
+    ProgressDialog progressDialog;
 
     LocationListener listenerGPS = new LocationListener() {
         @Override
@@ -92,12 +92,6 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
         // Required empty public constructor
     }
 
-    /*public void initTest() {
-        teste1.setName("GRAB");
-        teste1.setAddress(new AddressNucleus("R. Teresa Cristina", "1050", "Centro", "Fortaleza", "CE", "Brasil", "60015-141",
-                -3.7297003, -38.5398319));
-        teste1.setHour(new HourNucleus("Segunda-Sexta", "8h-18h"));
-    }*/
 
     //Requisitar núcleos do estado
     public void doRequest(String estado){
@@ -113,6 +107,10 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
 
         urlNucleusState = url + urlSigla;
 
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Carregando...");
+        progressDialog.show();
+
         // Request a string response from the provided URL.
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(urlNucleusState, new Response.Listener<JSONArray>() {
             @Override
@@ -125,10 +123,10 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
                         int id = jsonObject.getInt("id");
                         String name = jsonObject.getString("name");
                         String address =  jsonObject.getString("address");
-                        long latitude = jsonObject.getLong("latitude");
-                        long longitude = jsonObject.getLong("longitude");
-                        String hours =  jsonObject.getString("operating_hours");
-                        String services = jsonObject.getString("services");
+                        double latitude = jsonObject.optDouble("latitude");
+                        double longitude = jsonObject.optDouble("longitude");
+                        JSONArray hours =  jsonObject.getJSONArray("operating_hours");
+                        JSONArray services = jsonObject.getJSONArray("services");
 
                         nucleusHashMap.put(i, new Nucleus(id, name, latitude, longitude));
 
@@ -137,11 +135,14 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
                     }
                 }
 
+                progressDialog.dismiss();
+                nucleusOperations.initMarkers(mapPlace, nucleusHashMap, getActivity());
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //Erro
+                progressDialog.dismiss();
+                Toast.makeText(getActivity(), "Perdão, o servidor não respondeu!", Toast.LENGTH_SHORT).show();
                 Log.i("RESPONSE", error.getCause().toString());
             }
         });
@@ -165,10 +166,7 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
         mapPlace.getUiSettings().setMapToolbarEnabled(true);
 
         MapsInitializer.initialize(this.getActivity());
-
         initMap();
-        //doRequest();
-        //initTest();
 
         return view;
     }
@@ -177,7 +175,7 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
         mapPlace.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-3.7441914, -38.5380658), 15));
 
         verifyGPS();
-        //nucleusOperations.initMarkers(mapPlace);
+        //nucleusOperations.initMarkers(mapPlace, nucleusHashMap, getActivity());
         //eventMarkers();
     }
 
@@ -215,14 +213,7 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
                     state = addresses.get(0).getAdminArea();
 
                     if (state!=null){
-
-                        ProgressDialog progressDialog = new ProgressDialog(getActivity());
-                        progressDialog.setMessage("Carregando...");
-                        progressDialog.show();
-
                         doRequest(state);
-
-                        progressDialog.dismiss();
                     }
                     else {
                         Toast.makeText(getActivity(), "Verifique a conexão do GPS!", Toast.LENGTH_LONG);

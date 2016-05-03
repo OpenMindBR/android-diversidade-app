@@ -13,8 +13,8 @@ public class Nucleus implements Serializable {
     String email;
     String site;
     AddressNucleus address;
-    long latitude;
-    long longitude;
+    double latitude;
+    double longitude;
     ArrayList<HourNucleus> hour;
     ArrayList<Comment> comments;
     ArrayList<Service> services;
@@ -33,7 +33,7 @@ public class Nucleus implements Serializable {
         this.services = services;
     }
 
-    public Nucleus(int id, String name, long latitude, long longitude){
+    public Nucleus(int id, String name, double latitude, double longitude){
         this.id = id;
         this.name = name;
         this.latitude = latitude;
@@ -84,11 +84,11 @@ public class Nucleus implements Serializable {
         this.address = address;
     }
 
-    public long getLatitude() { return latitude; }
+    public double getLatitude() { return latitude; }
 
     public void setLatitude(long latitude) { this.latitude = latitude; }
 
-    public long getLongitude() { return longitude; }
+    public double getLongitude() { return longitude; }
 
     public void setLongitude(long longitude) { this.longitude = longitude; }
 

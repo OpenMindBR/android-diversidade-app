@@ -1,12 +1,19 @@
 package br.edu.ifce.engcomp.francis.diversidade.miscellaneous;
 
+import android.content.Context;
 import android.location.Location;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.HashMap;
+
+import br.edu.ifce.engcomp.francis.diversidade.model.Nucleus;
 
 /**
  * Created by Bolsista on 12/04/2016.
@@ -21,16 +28,18 @@ public class NucleusOperations {
         return myPosition;
     }
 
-    public void initMarkers(GoogleMap map) {
-        Marker markerNucleus = map.addMarker(new MarkerOptions().position(new LatLng(-3.7297003, -38.5398319))
-                .title("GRAB - Grupo de Resistência Asa Branca")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
-        markerNucleus.setSnippet("Clique mais uma vez para conhecer a organização.");
-
-        Marker markerEvent = map.addMarker(new MarkerOptions().position(new LatLng(-3.7441914, -38.5380658))
-                .title("Lançamento do app Diversidade - 15/05/2016")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)));
-        markerEvent.setSnippet("Clique mais uma vez para conhecer o evento");
+    public void initMarkers(GoogleMap map, HashMap<Integer, Nucleus> nucleus, Context context) {
+        if(!nucleus.isEmpty()){
+            for(int i = 0; i<nucleus.size(); i++){
+                map.addMarker(new MarkerOptions().position(new LatLng(nucleus.get(i).getLatitude(), nucleus.get(i).getLongitude()))
+                    .title(nucleus.get(i).getName())
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET))
+                            .snippet("Clique mais uma vez para conhecer a organização."));
+            }
+        }
+        else {
+            Toast.makeText(context, "Ainda não há núcleos cadastrados no seu estado.", Toast.LENGTH_LONG).show();
+        }
     }
 
     public String choseState(String state){
@@ -122,4 +131,11 @@ public class NucleusOperations {
 
         return sigla;
     }
+
+     /*public void initTest() {
+        teste1.setName("GRAB");
+        teste1.setAddress(new AddressNucleus("R. Teresa Cristina", "1050", "Centro", "Fortaleza", "CE", "Brasil", "60015-141",
+                -3.7297003, -38.5398319));
+        teste1.setHour(new HourNucleus("Segunda-Sexta", "8h-18h"));
+    }*/
 }
