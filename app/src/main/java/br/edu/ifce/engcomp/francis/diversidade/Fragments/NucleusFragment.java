@@ -44,6 +44,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import br.edu.ifce.engcomp.francis.diversidade.R;
 import br.edu.ifce.engcomp.francis.diversidade.activities.DetailNucleusActivity;
@@ -62,94 +63,14 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
     private GoogleMap mapPlace;
     private MapView mapView;
     public NucleusOperations nucleusOperations = new NucleusOperations();
-    public HashMap<Integer, Nucleus> nucleusHashMap = new HashMap<>();
+    Map<Integer, Nucleus> nucleusMap = new HashMap<>();
+    private Map<String,Integer> mapNucleusMarker = new HashMap<>();
+    private Map<Integer, String> mapNucleusMarkerAux = new HashMap<>();
     ProgressDialog progressDialog;
-
-    LocationListener listenerGPS = new LocationListener() {
-        @Override
-        public void onLocationChanged(Location location) {
-
-        }
-
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-
-        }
-
-        @Override
-        public void onProviderEnabled(String provider) {
-
-        }
-
-        @Override
-        public void onProviderDisabled(String provider) {
-
-        }
-    };
-
 
     public NucleusFragment() {
         // Required empty public constructor
     }
-
-
-    //Requisitar núcleos do estado
-    public void doRequest(String estado){
-        ArrayList<Nucleus> nucleusArrayList = new ArrayList<>();
-        // Instantiate the RequestQueue.
-        RequestQueue queue;
-        queue = Volley.newRequestQueue(getActivity());
-        String url ="http://diversidade-cloudsocial.rhcloud.com/api/v1/centers?state=";
-        String urlSigla = "";
-        String urlNucleusState = "";
-
-        urlSigla = nucleusOperations.choseState(estado);
-
-        urlNucleusState = url + urlSigla;
-
-        progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("Carregando...");
-        progressDialog.show();
-
-        // Request a string response from the provided URL.
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(urlNucleusState, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                Log.i("RESPONSE", response.toString());
-
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        JSONObject jsonObject = response.getJSONObject(i);
-                        int id = jsonObject.getInt("id");
-                        String name = jsonObject.getString("name");
-                        String address =  jsonObject.getString("address");
-                        double latitude = jsonObject.optDouble("latitude");
-                        double longitude = jsonObject.optDouble("longitude");
-                        JSONArray hours =  jsonObject.getJSONArray("operating_hours");
-                        JSONArray services = jsonObject.getJSONArray("services");
-
-                        nucleusHashMap.put(i, new Nucleus(id, name, latitude, longitude));
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                progressDialog.dismiss();
-                nucleusOperations.initMarkers(mapPlace, nucleusHashMap, getActivity());
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                progressDialog.dismiss();
-                Toast.makeText(getActivity(), "Perdão, o servidor não respondeu!", Toast.LENGTH_SHORT).show();
-                Log.i("RESPONSE", error.getCause().toString());
-            }
-        });
-        // Add the request to the RequestQueue.
-        queue.add(jsonArrayRequest);
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -175,8 +96,7 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
         mapPlace.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-3.7441914, -38.5380658), 15));
 
         verifyGPS();
-        //nucleusOperations.initMarkers(mapPlace, nucleusHashMap, getActivity());
-        //eventMarkers();
+        eventMarkers();
     }
 
     private void verifyGPS(){
@@ -228,6 +148,116 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
         }
     }
 
+    public void doRequest(String estado){
+        // Instantiate the RequestQueue.
+        RequestQueue queue;
+        queue = Volley.newRequestQueue(getActivity());
+        String url ="http://diversidade-cloudsocial.rhcloud.com/api/v1/centers?state=";
+        String urlSigla = "";
+        String urlNucleusState = "";
+
+        urlSigla = nucleusOperations.choseState(estado);
+
+        urlNucleusState = url + urlSigla;
+
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Carregando...");
+        progressDialog.show();
+
+        // Request a string response from the provided URL.
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(urlNucleusState, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                Log.i("RESPONSE", response.toString());
+
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject jsonObject = response.getJSONObject(i);
+                        int id = jsonObject.getInt("id");
+                        String name = jsonObject.getString("name");
+
+                        String address =  jsonObject.getString("address");
+                        String rua = "";
+                        String cidade = "";
+                        String estado = "";
+                        if (address.contains(",")){
+                            rua = address.substring(0, address.indexOf(","));
+                            address = address.substring(address.indexOf(",")+1);
+                            if (address.contains("-")){
+                                cidade = address.substring(0, address.indexOf("-")-1);
+                                address = address.substring(address.indexOf("-")+1);
+                                if (address.contains(",")){
+                                    estado = address.substring(0, address.indexOf(","));
+                                }
+                            }
+                        }
+
+                        double latitude = jsonObject.optDouble("latitude");
+                        double longitude = jsonObject.optDouble("longitude");
+
+                        JSONArray hours =  jsonObject.getJSONArray("operating_hours");
+                        ArrayList<HourNucleus> hoursN = new ArrayList<>();
+                        for (int j = 0; j<hours.length(); j++){
+                            JSONObject jsonObjectH = hours.getJSONObject(j);
+                            String day = jsonObjectH.getString("day_of_week");
+                            String hourD = jsonObjectH.getString("hour");
+
+                            hoursN.add(new HourNucleus(day, hourD));
+                        }
+
+                        JSONArray services = jsonObject.getJSONArray("services");
+                        ArrayList<Service> servicesN = new ArrayList<>();
+                        for(int k = 0; k<services.length(); k++){
+                            JSONObject jsonObjectS = services.getJSONObject(k);
+                            String title = jsonObjectS.getString("name");
+                            String description = jsonObjectS.getString("description");
+
+                            servicesN.add(new Service(title, description));
+                        }
+
+                        nucleusMap.put(i, new Nucleus(id, name, latitude, longitude,
+                                new AddressNucleus(rua, "default", "default", cidade, estado, "Brasil", "default"),
+                                hoursN, servicesN));
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                progressDialog.dismiss();
+                initMarkers();
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                Toast.makeText(getActivity(), "Perdão, o servidor não respondeu!", Toast.LENGTH_SHORT).show();
+                Log.i("RESPONSE", error.getCause().toString());
+            }
+        });
+        // Add the request to the RequestQueue.
+        queue.add(jsonArrayRequest);
+    }
+
+    public void initMarkers() {
+        if(!nucleusMap.isEmpty()){
+            for(int i = 0; i<nucleusMap.size(); i++){
+                Marker marker =  mapPlace.addMarker(new MarkerOptions().position(new LatLng(nucleusMap.get(i).getLatitude(),
+                        nucleusMap.get(i).getLongitude()))
+                        .title(nucleusMap.get(i).getName())
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET))
+                        .snippet("Clique mais uma vez para conhecer a organização."));
+
+                mapNucleusMarker.put(marker.getId(), nucleusMap.get(i).getId());
+                mapNucleusMarkerAux.put(nucleusMap.get(i).getId(), marker.getId());
+            }
+        }
+        else {
+            Toast.makeText(getActivity(), "Ainda não há núcleos cadastrados no seu estado.", Toast.LENGTH_LONG).show();
+        }
+    }
+
     private void eventMarkers() {
         mapPlace.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             private int tap = 0;
@@ -243,9 +273,7 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
                 } else {
                     position_2 = marker.getPosition();
                     if (position_1.equals(position_2)) {
-                        Intent intent = new Intent(getActivity(), DetailNucleusActivity.class);
-                        //intent.putExtra("INFOS_NUCLEUS", teste1);
-                        startActivity(intent);
+                        getDetailNucleus(marker.getId());
                     } else {
                         position_1 = marker.getPosition();
                     }
@@ -254,6 +282,41 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
             }
         });
     }
+
+    public void getDetailNucleus(String idMarker) {
+        if (mapNucleusMarker.get(idMarker) != null && nucleusMap!=null) {
+            for (int i = 0; i < nucleusMap.size(); i++) {
+                if (nucleusMap.get(i).getId() == mapNucleusMarker.get(idMarker)) {
+                    Intent detailNucleusActivityIntent = new Intent(getActivity(), DetailNucleusActivity.class);
+                    detailNucleusActivityIntent.putExtra("INFOS_NUCLEUS", nucleusMap.get(i));
+                    startActivity(detailNucleusActivityIntent);
+                }
+            }
+        }
+    }
+
+    LocationListener listenerGPS = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {
+
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
+    };
+
 
 
     @Override

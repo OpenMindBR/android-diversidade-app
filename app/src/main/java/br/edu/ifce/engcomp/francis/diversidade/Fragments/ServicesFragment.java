@@ -30,13 +30,9 @@ public class ServicesFragment extends Fragment {
     public ArrayList<Service> generateDataSourceMock(){
         ArrayList<Service> servicesArrayList = new ArrayList<>();
 
-        Service teste1 = new Service();
-        teste1.setName("Consulta Psicológica");
-        teste1.setCategory("Saúde");
+        Service teste1 = new Service("Consulta Psicológica", "Saúde");
 
-        Service teste2 = new Service();
-        teste2.setName("Grupo de Apoio");
-        teste2.setCategory("Social");
+        Service teste2 = new Service("Grupo de Apoio", "Social");
 
         servicesArrayList.add(teste1);
         servicesArrayList.add(teste2);

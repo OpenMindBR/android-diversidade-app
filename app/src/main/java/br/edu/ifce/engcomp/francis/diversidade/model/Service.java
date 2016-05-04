@@ -8,6 +8,12 @@ import java.io.Serializable;
 public class Service implements Serializable{
     private String name;
     private String category;
+    private String description;
+
+    public Service(String name, String description){
+        this.name = name;
+        this.description = description;
+    }
 
     public String getName() {
         return name;
@@ -24,4 +30,8 @@ public class Service implements Serializable{
     public void setCategory(String category) {
         this.category = category;
     }
+
+    public String getDescription() { return description; }
+
+    public void setDescription(String description) { this.description = description; }
 }

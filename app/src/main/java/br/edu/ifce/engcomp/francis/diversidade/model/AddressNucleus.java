@@ -16,8 +16,7 @@ public class AddressNucleus implements Serializable {
     double latitude;
     double longitude;
 
-    public AddressNucleus(String logradouro, String number, String neighborhood, String city, String state, String country, String cep,
-                          Double latitude, Double longitude) {
+    public AddressNucleus(String logradouro, String number, String neighborhood, String city, String state, String country, String cep) {
         this.logradouro = logradouro;
         this.number = number;
         this.neighborhood = neighborhood;
@@ -25,8 +24,6 @@ public class AddressNucleus implements Serializable {
         this.state = state;
         this.country = country;
         this.cep = cep;
-        this.latitude = latitude;
-        this.longitude = longitude;
     }
 
     public String getLogradouro() {

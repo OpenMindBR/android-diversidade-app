@@ -1,8 +1,8 @@
 package br.edu.ifce.engcomp.francis.diversidade.miscellaneous;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -11,7 +11,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import br.edu.ifce.engcomp.francis.diversidade.model.Nucleus;
 
@@ -28,13 +30,18 @@ public class NucleusOperations {
         return myPosition;
     }
 
-    public void initMarkers(GoogleMap map, HashMap<Integer, Nucleus> nucleus, Context context) {
+    public void initMarkers(GoogleMap map, ArrayList<Nucleus> nucleus, Context context, Map<String, Integer> mapNucleusMarker,
+                            Map<Integer, String> mapNucleusMarkerAux, ArrayList<Marker> markers) {
         if(!nucleus.isEmpty()){
             for(int i = 0; i<nucleus.size(); i++){
-                map.addMarker(new MarkerOptions().position(new LatLng(nucleus.get(i).getLatitude(), nucleus.get(i).getLongitude()))
+             Marker marker =  map.addMarker(new MarkerOptions().position(new LatLng(nucleus.get(i).getLatitude(), nucleus.get(i).getLongitude()))
                     .title(nucleus.get(i).getName())
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET))
                             .snippet("Clique mais uma vez para conhecer a organização."));
+
+                mapNucleusMarker.put(marker.getId(), nucleus.get(i).getId());
+                mapNucleusMarkerAux.put(nucleus.get(i).getId(), marker.getId());
+                markers.add(marker);
             }
         }
         else {
