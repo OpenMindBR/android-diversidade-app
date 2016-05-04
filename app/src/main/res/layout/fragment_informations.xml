@@ -106,7 +106,7 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="Ponto de Referência"
-                        android:id="@+id/referece_text_view"
+                        android:id="@+id/reference_text_view"
                         android:layout_marginBottom="2dp" />
 
                     <TextView
