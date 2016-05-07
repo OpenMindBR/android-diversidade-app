@@ -76,7 +76,6 @@ public class CommentActivity extends AppCompatActivity {
 
         if (id == R.id.review_menu) {
             sendComment();
-            //Toast.makeText(getBaseContext(), "Comentário enviado!", Toast.LENGTH_SHORT).show();
             return true;
         }
 

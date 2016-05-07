@@ -41,7 +41,6 @@ public class DetailNucleusActivity extends AppCompatActivity {
     TextView nucleusName;
     TextView nucleusCity;
     Nucleus nucleus;
-    ProgressDialog progressDialog;
 
     public void initDataSource() {
         Intent currentIntent = getIntent();

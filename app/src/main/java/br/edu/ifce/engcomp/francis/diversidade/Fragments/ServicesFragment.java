@@ -29,19 +29,6 @@ public class ServicesFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public ArrayList<Service> generateDataSourceMock(){
-        ArrayList<Service> servicesArrayList = new ArrayList<>();
-
-        Service teste1 = new Service("Consulta Psicológica", "Saúde");
-
-        Service teste2 = new Service("Grupo de Apoio", "Social");
-
-        servicesArrayList.add(teste1);
-        servicesArrayList.add(teste2);
-
-        return servicesArrayList;
-    }
-
     @Override
     public void onCreate(Bundle savedInstace){
         super.onCreate(savedInstace);

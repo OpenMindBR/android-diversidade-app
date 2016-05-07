@@ -119,7 +119,7 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
             myPosition = new LatLng((float) locationUser2.getLatitude(), (float) locationUser2.getLongitude());
         }
         else{
-            Toast.makeText(getActivity(), "Verifique a conexão do GPS!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), R.string.toast_verify_gps, Toast.LENGTH_LONG).show();
         }
 
         if(myPosition!=null){
@@ -136,7 +136,7 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
                         doRequest(state);
                     }
                     else {
-                        Toast.makeText(getActivity(), "Verifique a conexão do GPS!", Toast.LENGTH_LONG);
+                        Toast.makeText(getActivity(), R.string.toast_verify_gps, Toast.LENGTH_LONG);
                     }
 
                 }
@@ -144,7 +144,7 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
                 e.fillInStackTrace();
             }
         }else {
-            Toast.makeText(getActivity(), "Verifique a conexão do GPS!", Toast.LENGTH_LONG);
+            Toast.makeText(getActivity(), R.string.toast_verify_gps, Toast.LENGTH_LONG);
         }
     }
 
@@ -161,19 +161,11 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
         urlNucleusState = url + urlSigla;
 
         progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("Carregando...");
+        progressDialog.setMessage(getResources().getString(R.string.progress_dialog_load));
         progressDialog.show();
 
         // Request a string response from the provided URL.
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(urlNucleusState, new Response.Listener<JSONArray>() {
-            JSONObject params = new JSONObject();
-            String name="";
-
-            public void setParams(JSONObject params) throws JSONException {
-                this.params = params;
-                params.put("name", name);
-            }
-
             @Override
             public void onResponse(JSONArray response) {
                 Log.i("RESPONSE", response.toString());
@@ -231,7 +223,7 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
 
                 progressDialog.dismiss();
                 Log.i("RESPONSE", error.toString());
-                Toast.makeText(getActivity(), "Perdão, o servidor não respondeu!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.error_server, Toast.LENGTH_SHORT).show();
             }
         }){
             @Override
@@ -253,14 +245,14 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
                         nucleusMap.get(i).getLongitude()))
                         .title(nucleusMap.get(i).getName())
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET))
-                        .snippet("Clique mais uma vez para conhecer a organização."));
+                        .snippet(getResources().getString(R.string.snippet_marker_message)));
 
                 mapNucleusMarker.put(marker.getId(), nucleusMap.get(i).getId());
                 mapNucleusMarkerAux.put(nucleusMap.get(i).getId(), marker.getId());
             }
         }
         else {
-            Toast.makeText(getActivity(), "Ainda não há núcleos cadastrados no seu estado.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), R.string.toast_any_nucleus, Toast.LENGTH_LONG).show();
         }
     }
 

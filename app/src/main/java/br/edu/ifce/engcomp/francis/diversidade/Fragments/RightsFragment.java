@@ -54,7 +54,7 @@ public class RightsFragment extends Fragment implements RecyclerViewOnClickListe
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         String url ="http://diversidade-cloudsocial.rhcloud.com/api/v1/news/categories/rights";
         progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("Carregando...");
+        progressDialog.setMessage(getResources().getString(R.string.progress_dialog_load));
         progressDialog.show();
 
         // Request a string response from the provided URL.
@@ -85,7 +85,7 @@ public class RightsFragment extends Fragment implements RecyclerViewOnClickListe
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
-                Toast.makeText(getActivity(), "Erro no servidor!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.error_server, Toast.LENGTH_SHORT).show();
             }
         }){
             @Override
