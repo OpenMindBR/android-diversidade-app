@@ -35,7 +35,7 @@ public class Nucleus implements Serializable {
     }
 
     public Nucleus(int id, String name, String responsible, String phone, String email, String site, double latitude,
-                   double longitude, AddressNucleus address, ArrayList<HourNucleus> hour, ArrayList<Service> services){
+                   double longitude, AddressNucleus address,ArrayList<Service> services){
         this.id = id;
         this.name = name;
         this.responsible = responsible;
@@ -45,7 +45,6 @@ public class Nucleus implements Serializable {
         this.latitude = latitude;
         this.longitude = longitude;
         this.address = address;
-        this.hour = hour;
         this.services = services;
     }
 

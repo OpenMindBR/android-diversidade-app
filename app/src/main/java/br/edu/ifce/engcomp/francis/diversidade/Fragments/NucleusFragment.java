@@ -201,16 +201,6 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
                         double latitude = jsonObject.optDouble("latitude");
                         double longitude = jsonObject.optDouble("longitude");
 
-                        JSONArray hours =  jsonObject.getJSONArray("operating_hours");
-                        ArrayList<HourNucleus> hoursN = new ArrayList<>();
-                        for (int j = 0; j<hours.length(); j++){
-                            JSONObject jsonObjectH = hours.getJSONObject(j);
-                            String day = jsonObjectH.getString("day_of_week");
-                            String hourD = jsonObjectH.getString("hour");
-
-                            hoursN.add(new HourNucleus(day, hourD));
-                        }
-
                         JSONArray services = jsonObject.getJSONArray("services");
                         ArrayList<Service> servicesN = new ArrayList<>();
                         for(int k = 0; k<services.length(); k++){
@@ -222,8 +212,7 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
                         }
 
                         nucleusMap.put(i, new Nucleus(id, name, responsible, phone, email, site, latitude, longitude,
-                                new AddressNucleus(rua, numero, bairro, cidade, estado, pais),
-                                hoursN, servicesN));
+                                new AddressNucleus(rua, numero, bairro, cidade, estado, pais), servicesN));
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -249,7 +238,6 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
                 map.put("Accept", "application/json; charset=UTF-8");
                 return map;
             }
-
         };
 
         // Add the request to the RequestQueue.

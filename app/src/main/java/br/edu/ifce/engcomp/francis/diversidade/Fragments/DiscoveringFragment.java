@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -29,6 +30,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import br.edu.ifce.engcomp.francis.diversidade.R;
 import br.edu.ifce.engcomp.francis.diversidade.adapters.TextRecyclerViewAdapter;
@@ -68,9 +71,10 @@ public class DiscoveringFragment extends Fragment implements RecyclerViewOnClick
                                 JSONObject jsonObject = response.getJSONObject(i);
                                 String title = jsonObject.getString("title");
                                 String text = jsonObject.getString("text");
+                                String source = jsonObject.getString("source");
                                 String category = jsonObject.getString("category");
 
-                                dataSource.add(new TextBlog(title, text, "http://www.google.com", category));
+                                dataSource.add(new TextBlog(title, text, source, category));
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -87,7 +91,14 @@ public class DiscoveringFragment extends Fragment implements RecyclerViewOnClick
                 progressDialog.dismiss();
                 Toast.makeText(getActivity(), "Erro no servidor!", Toast.LENGTH_SHORT).show();
             }
-        });
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map map = new HashMap();
+                map.put("Accept", "application/json; charset=UTF-8");
+                return map;
+            }
+        };
 
         // Add the request to the RequestQueue.
         queue.add(jsonArrayRequest);
@@ -116,7 +127,14 @@ public class DiscoveringFragment extends Fragment implements RecyclerViewOnClick
 
     @Override
     public void onClickListener(View view, int position) {
-        String urlSource = dataSource.get(position).getSource();
+        String urlSource = "";
+
+        if(!urlSource.startsWith("http://", 0)){
+            urlSource = "http://" + dataSource.get(position).getSource();
+        }
+        else {
+            urlSource = dataSource.get(position).getSource();
+        }
 
         Uri uri = Uri.parse(urlSource);
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);

@@ -26,10 +26,6 @@ import br.edu.ifce.engcomp.francis.diversidade.model.Service;
  * Created by Bolsista on 29/03/2016.
  */
 public class InformationsFragment extends Fragment {
-    RecyclerView recyclerView;
-    LinearLayoutManager layoutManager;
-    ArrayList<HourNucleus> dataSource;
-
     Nucleus nucleus;
     TextView responsavel;
     TextView telefone;
@@ -69,18 +65,6 @@ public class InformationsFragment extends Fragment {
         logradouro.setText(nucleus.getAddress().getLogradouro() + ", " + nucleus.getAddress().getNumber());
         bairroCidade.setText(nucleus.getAddress().getNeighborhood() + ", " + nucleus.getAddress().getCity());
         estadoPais.setText(nucleus.getAddress().getState() + " - " + nucleus.getAddress().getCountry());
-
-        dataSource = nucleus.getHour();
-        //dataSource.add(new HourNucleus("segunda", "19h"));
-
-        HoursRecyclerViewAdapter adapter = new HoursRecyclerViewAdapter(getActivity().getApplicationContext(), dataSource);
-        this.layoutManager = new LinearLayoutManager(getActivity());
-
-        this.recyclerView = (RecyclerView) view.findViewById(R.id.hours_nucleus_list);
-        this.recyclerView.setHasFixedSize(false);
-        this.recyclerView.setLayoutManager(layoutManager);
-        this.recyclerView.setAdapter(adapter);
-        this.recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         return view;
     }
