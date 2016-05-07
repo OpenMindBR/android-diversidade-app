@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -24,6 +25,10 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<CommentsRe
     public CommentsRecyclerViewAdapter(Context context, ArrayList<Comment> comments) {
         this.dataSource = comments;
         this.context = context;
+
+        if(dataSource.isEmpty()){
+            Toast.makeText(context, R.string.no_comments, Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -37,8 +42,12 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<CommentsRe
     public void onBindViewHolder(CommentsRecyclerViewAdapter.ViewHolder holder, int position) {
         Comment comment = this.dataSource.get(position);
 
-        holder.authorTextView.setText(comment.getAuthor());
-        holder.dateTextView.setText(comment.getDate().toString());
+        if(comment.getAuthor().isEmpty()){
+            holder.authorTextView.setText("Anônimo");
+        }else {
+            holder.authorTextView.setText(comment.getAuthor());
+        }
+        holder.dateTextView.setText(comment.getDate().substring(0, 10));
         holder.contentTextView.setText(comment.getContent());
     }
 

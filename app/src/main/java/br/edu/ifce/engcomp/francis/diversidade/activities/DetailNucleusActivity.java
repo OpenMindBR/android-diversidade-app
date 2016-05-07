@@ -1,5 +1,6 @@
 package br.edu.ifce.engcomp.francis.diversidade.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
@@ -7,10 +8,22 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import br.edu.ifce.engcomp.francis.diversidade.Fragments.CommentsFragment;
 import br.edu.ifce.engcomp.francis.diversidade.Fragments.InformationsFragment;
@@ -18,6 +31,7 @@ import br.edu.ifce.engcomp.francis.diversidade.Fragments.ServicesFragment;
 import br.edu.ifce.engcomp.francis.diversidade.R;
 import br.edu.ifce.engcomp.francis.diversidade.model.Developer;
 import br.edu.ifce.engcomp.francis.diversidade.model.Nucleus;
+import br.edu.ifce.engcomp.francis.diversidade.model.TextBlog;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DetailNucleusActivity extends AppCompatActivity {
@@ -56,7 +70,6 @@ public class DetailNucleusActivity extends AppCompatActivity {
         this.initTabHost();
         this.initComponents();
         this.initAddComment();
-
     }
 
     @Override
@@ -87,7 +100,7 @@ public class DetailNucleusActivity extends AppCompatActivity {
         this.placeTabHost.addTab(servicesTab, ServicesFragment.class, null);
         this.placeTabHost.addTab(commentsTab, CommentsFragment.class, null);
 
-        this.placeTabHost.setCurrentTab(1);
+        this.placeTabHost.setCurrentTab(0);
 
         this.stylizeTabsTextView(placeTabHost);
     }
@@ -118,6 +131,7 @@ public class DetailNucleusActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intentCommentActivity = new Intent(getBaseContext(), CommentActivity.class);
+                intentCommentActivity.putExtra("INFOS_NUCLEUS", nucleus);
                 startActivity(intentCommentActivity);
             }
         });

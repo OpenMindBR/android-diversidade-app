@@ -39,7 +39,7 @@ public class ServicesRecyclerViewAdapter extends RecyclerView.Adapter<ServicesRe
         Service service = this.dataSource.get(position);
 
         holder.nameTextView.setText(service.getName());
-        holder.categoryTextView.setText(service.getCategory());
+        holder.categoryTextView.setText(service.getDescription());
     }
 
     @Override

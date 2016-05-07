@@ -1,33 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Diversidade</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Configurações</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_detail_nucleus">Details</string>
+    <string name="title_activity_detail_nucleus">Detalhes</string>
     <string name="title_activity_splash">Diversidade</string>
 
-    <string name="title_toolbar_nucleus">Nucleus</string>
-    <string name="title_toolbar_discovery">Discovering Yourself</string>
-    <string name="title_toolbar_rights">Rights</string>
-    <string name="title_toolbar_health">Health</string>
-    <string name="title_toolbar_suggestion">Suggestion of Nucleus</string>
-    <string name="title_toolbar_about">About</string>
+    <string name="title_toolbar_nucleus">Núcleos</string>
+    <string name="title_toolbar_discovery">Descobrindo-se</string>
+    <string name="title_toolbar_rights">Direitos</string>
+    <string name="title_toolbar_health">Saúde</string>
+    <string name="title_toolbar_about">Sobre</string>
 
-    <string name="place_tab_informations">Informations</string>
-    <string name="place_tab_services">Services</string>
-    <string name="place_tab_comments">Comments</string>
+    <string name="place_tab_informations">Informações</string>
+    <string name="place_tab_services">Serviços</string>
+    <string name="place_tab_comments">Comentários</string>
 
-    <string name="message_fail_gps">Verify the GPS connection!</string>
+    <string name="message_fail_gps">Verifique a conexão do GPS e aguarde!</string>
 
     <string name="developer_name_lastname">First name and Last name</string>
     <string name="title_splash">Diversidade</string>
     <string name="slogan_splash">Seja você, seja feliz!</string>
-    <string name="developers_text_view">Developers</string>
+    <string name="developers_text_view">Desenvolvedores</string>
 
     <string name="nucleus_name_sug">Name of nucleus or event</string>
     <string name="hint_nucleus_name">Type a name</string>
@@ -48,24 +48,24 @@
     <string name="nucleus_button_send">Send</string>
 
     <string name="title_menu_nav">Diversidade: seja você, seja feliz!</string>
-    <string name="title_activity_comment">Write a comment</string>
+    <string name="site_menu_nav"></string>
+    <string name="title_activity_comment">Comente</string>
     <string name="action_send">send_comment</string>
     <string name="readers_review_toolbar_subtitle_plural">caracters</string>
     <string name="readers_review_toolbar_subtitle">caracter</string>
-    <string name="title_activity_detail_developer">Developer</string>
-    <string name="information_fragment_address_title">Address</string>
-    <string name="information_fragment_business_hours">Bussiness hours</string>
-    <string name="information_fragment_contacts">Contacts</string>
+    <string name="title_activity_detail_developer">Desenvolvedor</string>
+    <string name="information_fragment_address_title">Endereço</string>
+    <string name="information_fragment_contacts">Contatos</string>
     <string name="nucleus_responsible">Responsible: </string>
     <string name="nucleus_phone">Phone number:</string>
     <string name="nucleus_email">E-Mail:</string>
-    <string name="toast_verify_gps">Verify the GPS connection!</string>
-    <string name="progress_dialog_load">Loading...</string>
-    <string name="error_server">Sorry, the server didn\'t work. Try again!</string>
-    <string name="snippet_marker_message">Click again to meet the organization.</string>
-    <string name="toast_any_nucleus">\"There aren\'t any nucleus in your state yet.</string>
-    <string name="progress_dialog_post">Posting...</string>
-    <string name="toast_success_post">Comment successfully posted!</string>
-    <string name="no_comments">There aren\'t any comments yet.</string>
+    <string name="toast_verify_gps">Verifique a conexão do GPS e aguarde!</string>
+    <string name="progress_dialog_load">Carregando...</string>
+    <string name="error_server">Perdão, o servidor não respondeu. Tente novamente!</string>
+    <string name="snippet_marker_message">Clique mais uma vez e conheça este núcleo..</string>
+    <string name="toast_any_nucleus">\Ainda não há núcleos cadastrados no seu estado.</string>
+    <string name="no_comments">Ainda não há comentários.</string>
+    <string name="progress_dialog_post">Postando...</string>
+    <string name="toast_success_post">Comentário postado com sucesso!</string>
 
 </resources>
