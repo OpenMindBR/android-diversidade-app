@@ -12,12 +12,12 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -53,7 +53,6 @@ import br.edu.ifce.engcomp.francis.diversidade.model.AddressNucleus;
 import br.edu.ifce.engcomp.francis.diversidade.model.HourNucleus;
 import br.edu.ifce.engcomp.francis.diversidade.model.Nucleus;
 import br.edu.ifce.engcomp.francis.diversidade.model.Service;
-import br.edu.ifce.engcomp.francis.diversidade.model.TextBlog;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -166,6 +165,14 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
 
         // Request a string response from the provided URL.
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(urlNucleusState, new Response.Listener<JSONArray>() {
+            JSONObject params = new JSONObject();
+            String name="";
+
+            public void setParams(JSONObject params) throws JSONException {
+                this.params = params;
+                params.put("name", name);
+            }
+
             @Override
             public void onResponse(JSONArray response) {
                 Log.i("RESPONSE", response.toString());
@@ -175,22 +182,21 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
                         JSONObject jsonObject = response.getJSONObject(i);
                         int id = jsonObject.getInt("id");
                         String name = jsonObject.getString("name");
+                        String responsible = jsonObject.getString("responsible");
+                        String email = jsonObject.getString("email");
+                        String phone = jsonObject.getString("phone");
+                        String site = jsonObject.getString("website");
 
                         String address =  jsonObject.getString("address");
                         String rua = "";
-                        String cidade = "";
-                        String estado = "";
                         if (address.contains(",")){
                             rua = address.substring(0, address.indexOf(","));
-                            address = address.substring(address.indexOf(",")+1);
-                            if (address.contains("-")){
-                                cidade = address.substring(0, address.indexOf("-")-1);
-                                address = address.substring(address.indexOf("-")+1);
-                                if (address.contains(",")){
-                                    estado = address.substring(0, address.indexOf(","));
-                                }
-                            }
                         }
+                        String numero = jsonObject.getString("street_number");
+                        String bairro = jsonObject.getString("sublocality");
+                        String cidade = jsonObject.getString("city");
+                        String estado = jsonObject.getString("state");
+                        String pais = jsonObject.getString("country");
 
                         double latitude = jsonObject.optDouble("latitude");
                         double longitude = jsonObject.optDouble("longitude");
@@ -215,8 +221,8 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
                             servicesN.add(new Service(title, description));
                         }
 
-                        nucleusMap.put(i, new Nucleus(id, name, latitude, longitude,
-                                new AddressNucleus(rua, "default", "default", cidade, estado, "Brasil", "default"),
+                        nucleusMap.put(i, new Nucleus(id, name, responsible, phone, email, site, latitude, longitude,
+                                new AddressNucleus(rua, numero, bairro, cidade, estado, pais),
                                 hoursN, servicesN));
 
                     } catch (JSONException e) {
@@ -231,11 +237,21 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+
                 progressDialog.dismiss();
+                Log.i("RESPONSE", error.toString());
                 Toast.makeText(getActivity(), "Perdão, o servidor não respondeu!", Toast.LENGTH_SHORT).show();
-                Log.i("RESPONSE", error.getCause().toString());
             }
-        });
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map map = new HashMap();
+                map.put("Accept", "application/json; charset=UTF-8");
+                return map;
+            }
+
+        };
+
         // Add the request to the RequestQueue.
         queue.add(jsonArrayRequest);
     }
@@ -298,22 +314,23 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
     LocationListener listenerGPS = new LocationListener() {
         @Override
         public void onLocationChanged(Location location) {
-
+            Log.i("LISTENER", "LocationChanged");
         }
 
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {
+            Log.i("LISTENER", "StatusChanged");
 
         }
 
         @Override
         public void onProviderEnabled(String provider) {
-
+            Log.i("LISTENER", "ProviderEnabled");
         }
 
         @Override
         public void onProviderDisabled(String provider) {
-
+            Log.i("LISTENER", "ProviderDisabled");
         }
     };
 

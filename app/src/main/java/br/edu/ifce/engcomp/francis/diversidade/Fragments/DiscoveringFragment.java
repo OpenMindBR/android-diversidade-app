@@ -84,6 +84,7 @@ public class DiscoveringFragment extends Fragment implements RecyclerViewOnClick
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
                 Toast.makeText(getActivity(), "Erro no servidor!", Toast.LENGTH_SHORT).show();
             }
         });

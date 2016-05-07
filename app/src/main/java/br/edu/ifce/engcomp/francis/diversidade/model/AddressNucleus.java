@@ -16,14 +16,13 @@ public class AddressNucleus implements Serializable {
     double latitude;
     double longitude;
 
-    public AddressNucleus(String logradouro, String number, String neighborhood, String city, String state, String country, String cep) {
+    public AddressNucleus(String logradouro, String number, String neighborhood, String city, String state, String country) {
         this.logradouro = logradouro;
         this.number = number;
         this.neighborhood = neighborhood;
         this.city = city;
         this.state = state;
         this.country = country;
-        this.cep = cep;
     }
 
     public String getLogradouro() {

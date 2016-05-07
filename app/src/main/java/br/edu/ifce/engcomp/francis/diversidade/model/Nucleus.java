@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class Nucleus implements Serializable {
     int id;
     String name;
+    String responsible;
     String phone;
     String email;
     String site;
@@ -33,10 +34,14 @@ public class Nucleus implements Serializable {
         this.services = services;
     }
 
-    public Nucleus(int id, String name, double latitude, double longitude, AddressNucleus address,
-                   ArrayList<HourNucleus> hour, ArrayList<Service> services){
+    public Nucleus(int id, String name, String responsible, String phone, String email, String site, double latitude,
+                   double longitude, AddressNucleus address, ArrayList<HourNucleus> hour, ArrayList<Service> services){
         this.id = id;
         this.name = name;
+        this.responsible = responsible;
+        this.phone = phone;
+        this.email = email;
+        this.site = site;
         this.latitude = latitude;
         this.longitude = longitude;
         this.address = address;
@@ -118,5 +123,21 @@ public class Nucleus implements Serializable {
 
     public void setServices(ArrayList<Service> services) {
         this.services = services;
+    }
+
+    public String getResponsible() {
+        return responsible;
+    }
+
+    public void setResponsible(String responsible) {
+        this.responsible = responsible;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 }

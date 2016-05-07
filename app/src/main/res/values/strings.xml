@@ -57,5 +57,8 @@
     <string name="information_fragment_address_title">Address</string>
     <string name="information_fragment_business_hours">Bussiness hours</string>
     <string name="information_fragment_contacts">Contacts</string>
+    <string name="nucleus_responsible">Responsible: </string>
+    <string name="nucleus_phone">Phone number:</string>
+    <string name="nucleus_email">E-Mail:</string>
 
 </resources>
