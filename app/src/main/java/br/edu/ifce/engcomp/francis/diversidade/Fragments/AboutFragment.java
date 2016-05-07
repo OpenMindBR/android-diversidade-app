@@ -69,8 +69,7 @@ public class AboutFragment extends Fragment implements RecyclerViewOnClickListen
         ArrayList<Contact> joamilaContacts = new ArrayList<>();
         joamilaContacts.add(new Contact("gmail", "joamila.brito@gmail.com"));
         joamilaContacts.add(new Contact("facebook", "fb.com/joamilab"));
-        joamilaContacts.add(new Contact("twitter", "@joamila"));
-        joamilaContacts.add(new Contact("instagram", "@joamilab"));
+        joamilaContacts.add(new Contact("twitter", "twitter.com/joamila"));
         joamilaContacts.add(new Contact("github", "github.com/joamilab"));
         joamila.setContacts(joamilaContacts);
 

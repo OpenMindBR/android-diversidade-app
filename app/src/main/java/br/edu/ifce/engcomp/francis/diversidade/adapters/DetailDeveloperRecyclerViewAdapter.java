@@ -64,9 +64,6 @@ public class DetailDeveloperRecyclerViewAdapter extends RecyclerView.Adapter<Det
             case "github":
                 holder.contactImageView.setImageResource(R.drawable.ic_github);
                 break;
-            default:
-                holder.contactImageView.setImageResource(R.drawable.ic_gay_place);
-                break;
         }
     }
 
