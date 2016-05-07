@@ -64,5 +64,8 @@
     <string name="error_server">Perdão, o servidor não respondeu. Tente novamente!</string>
     <string name="snippet_marker_message">Clique mais uma vez e conheça este núcleo..</string>
     <string name="toast_any_nucleus">\Ainda não há núcleos cadastrados no seu estado.</string>
+    <string name="no_comments">Ainda não há comentários.</string>
+    <string name="progress_dialog_post">Postando...</string>
+    <string name="toast_success_post">Comentário postado com sucesso!</string>
 
 </resources>
