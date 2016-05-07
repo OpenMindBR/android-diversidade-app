@@ -65,5 +65,8 @@
     <string name="error_server">Sorry, the server didn\'t work. Try again!</string>
     <string name="snippet_marker_message">Click again to meet the organization.</string>
     <string name="toast_any_nucleus">\"There aren\'t any nucleus in your state yet.</string>
+    <string name="progress_dialog_post">Posting...</string>
+    <string name="toast_success_post">Comment successfully posted!</string>
+    <string name="no_comments">There aren\'t any comments yet.</string>
 
 </resources>

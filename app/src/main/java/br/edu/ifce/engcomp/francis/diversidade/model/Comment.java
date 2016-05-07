@@ -11,10 +11,10 @@ public class Comment implements Serializable {
     private String content;
     private int idNucleus;
 
-    public Comment(String author, String content, int idNucleus){
+    public Comment(String author, String content, String date){
         this.author = author;
         this.content = content;
-        this.idNucleus = idNucleus;
+        this.date = date;
     }
 
     public String getAuthor() {

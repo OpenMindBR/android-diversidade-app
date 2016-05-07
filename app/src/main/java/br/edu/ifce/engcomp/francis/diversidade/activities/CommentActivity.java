@@ -59,8 +59,6 @@ public class CommentActivity extends AppCompatActivity {
         commentEditText = (EditText) findViewById(R.id.new_comment_edit_text);
         userCommentEditText = (EditText) findViewById(R.id.user_comment_edit_text);
         commentEditText.addTextChangedListener(this.buildTextWatcher());
-
-        doRequest();
     }
 
     @Override
@@ -82,42 +80,6 @@ public class CommentActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void doRequest(){
-        // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://diversidade-cloudsocial.rhcloud.com/api/v1/centers/1/comments";
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Carregando...");
-        progressDialog.show();
-
-        // Request a string response from the provided URL.
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.i("RESPONSE-COM", response.toString());
-
-                        progressDialog.dismiss();
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                progressDialog.dismiss();
-                Toast.makeText(getApplicationContext(), "Erro no servidor!", Toast.LENGTH_SHORT).show();
-            }
-        }){
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map map = new HashMap();
-                map.put("Accept", "application/json; charset=UTF-8");
-                return map;
-            }
-        };
-
-        // Add the request to the RequestQueue.
-        queue.add(jsonArrayRequest);
-    }
-
     public void sendComment(){
         final Nucleus nucleus = (Nucleus) getIntent().getExtras().get("INFOS_NUCLEUS");
         final String commentAuthor = userCommentEditText.getText().toString();
@@ -132,15 +94,15 @@ public class CommentActivity extends AppCompatActivity {
         JSONObject params = new JSONObject();
 
         try {
-            params.put("comment_user_name", commentAuthor);
-            params.put("comment_text", commentContent);
+            params.put("text", commentContent);
+            params.put("name", commentAuthor);
         } catch (JSONException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Postando...");
+        progressDialog.setMessage(getResources().getString(R.string.progress_dialog_post));
         progressDialog.show();
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
@@ -150,7 +112,9 @@ public class CommentActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         progressDialog.dismiss();
-                        Toast.makeText(getApplication(), "Postado com SUCESSO", Toast.LENGTH_SHORT);
+                        commentEditText.setText("");
+                        userCommentEditText.setText("");
+                        Toast.makeText(getApplication(), R.string.toast_success_post, Toast.LENGTH_SHORT);
 
                     }
                 }, new Response.ErrorListener() {
@@ -158,14 +122,17 @@ public class CommentActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
-                Toast.makeText(getApplication(), "ERRO no servidor", Toast.LENGTH_SHORT);
-
+                if(error.networkResponse.statusCode == 406){
+                    commentEditText.setText("");
+                    userCommentEditText.setText("");
+                    Toast.makeText(getApplication(), R.string.toast_success_post, Toast.LENGTH_SHORT);
+                }
+                else {
+                    Toast.makeText(getApplication(), R.string.error_server, Toast.LENGTH_SHORT);
+                }
             }
         }) {
 
-            /**
-             * Passing some request headers
-             * */
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
@@ -175,42 +142,7 @@ public class CommentActivity extends AppCompatActivity {
 
         };
 
-
-// Adding request to request queue
         queue.add(jsonObjReq);
-
-        /*StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.i("RESPONSE-COM", response);
-                Toast.makeText(getApplicationContext(), "Postado com sucesso!", Toast.LENGTH_SHORT);
-                progressDialog.dismiss();
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "Erro no servidor!", Toast.LENGTH_SHORT);
-                progressDialog.dismiss();
-            }
-        }){
-            @Override
-            protected Map<String,String> getParams(){
-                Map<String,String> params = new HashMap<String, String>();
-                params.put("name", commentAuthor);
-                params.put("text", Uri.encode(commentContent));
-
-                return params;
-            }
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String,String> params = new HashMap<String, String>();
-                params.put("Content-Type","application/json");
-                return params;
-            }
-        };
-        queue.add(request);*/
     }
 
     private TextWatcher buildTextWatcher() {

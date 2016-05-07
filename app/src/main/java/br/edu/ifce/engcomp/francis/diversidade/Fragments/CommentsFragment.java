@@ -1,19 +1,37 @@
 package br.edu.ifce.engcomp.francis.diversidade.Fragments;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import br.edu.ifce.engcomp.francis.diversidade.R;
 import br.edu.ifce.engcomp.francis.diversidade.adapters.CommentsRecyclerViewAdapter;
 import br.edu.ifce.engcomp.francis.diversidade.model.Comment;
+import br.edu.ifce.engcomp.francis.diversidade.model.Nucleus;
 
 /**
  * Created by Bolsista on 29/03/2016.
@@ -21,30 +39,75 @@ import br.edu.ifce.engcomp.francis.diversidade.model.Comment;
 public class CommentsFragment extends Fragment {
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
-    ArrayList<Comment> dataSource;
+    ArrayList<Comment> dataSource = new ArrayList<>();
+    ArrayList<Comment> comments = new ArrayList<>();
+    ProgressDialog progressDialog;
+    Nucleus nucleus;
+    CommentsRecyclerViewAdapter adapter;
 
     public CommentsFragment() {
         // Required empty public constructor
     }
 
-    public ArrayList<Comment> generateDataSourceMock(){
-        ArrayList<Comment> commentsArrayList = new ArrayList<>();
+    public void doRequest(){
+        Intent currentIntent = getActivity().getIntent();
+        nucleus = (Nucleus) currentIntent.getSerializableExtra("INFOS_NUCLEUS");
 
-        Comment teste1 = new Comment("Anônimo", "MARA!", 1);
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        String urlBase = "http://diversidade-cloudsocial.rhcloud.com/api/v1/centers/";
+        String urlSufix = "/comments";
+        String url = urlBase + String.valueOf(nucleus.getId()) + urlSufix;
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage(getResources().getString(R.string.progress_dialog_load));
+        progressDialog.show();
 
-        Comment teste2 = new Comment("Maria", "Adorei e vou voltar!", 2);
+        // Request a string response from the provided URL.
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.i("RESPONSE-COM", response.toString());
 
-        commentsArrayList.add(teste1);
-        commentsArrayList.add(teste2);
+                        for(int i =0; i<response.length(); i++){
+                            try {
+                                JSONObject jsonObject = response.getJSONObject(i);
+                                String name = jsonObject.getString("name");
+                                String text = jsonObject.getString("text");
+                                String date = jsonObject.getString("created_at");
 
-        return commentsArrayList;
+                                dataSource.add(new Comment(name, text, date));
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        progressDialog.dismiss();
+                        adapter.notifyDataSetChanged();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                Toast.makeText(getActivity(), R.string.error_server, Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map map = new HashMap();
+                map.put("Accept", "application/json; charset=UTF-8");
+                return map;
+            }
+        };
+
+        // Add the request to the RequestQueue.
+        queue.add(jsonArrayRequest);
     }
 
     @Override
     public void onCreate(Bundle savedInstace){
         super.onCreate(savedInstace);
-
-        dataSource = generateDataSourceMock();
     }
 
     @Override
@@ -53,7 +116,9 @@ public class CommentsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_comments, container, false);
 
-        CommentsRecyclerViewAdapter adapter = new CommentsRecyclerViewAdapter(getActivity().getApplicationContext(), dataSource);
+        doRequest();
+
+        adapter = new CommentsRecyclerViewAdapter(getActivity().getApplicationContext(), dataSource);
         this.layoutManager = new LinearLayoutManager(getActivity());
 
         this.recyclerView = (RecyclerView) view.findViewById(R.id.comments_nucleus_list);
