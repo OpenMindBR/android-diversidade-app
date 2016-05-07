@@ -30,15 +30,9 @@ public class CommentsFragment extends Fragment {
     public ArrayList<Comment> generateDataSourceMock(){
         ArrayList<Comment> commentsArrayList = new ArrayList<>();
 
-        Comment teste1 = new Comment();
-        teste1.setAuthor("Anônimo");
-        teste1.setDate("25/12/2015 - 09:35");
-        teste1.setContent("MARA!");
+        Comment teste1 = new Comment("Anônimo", "MARA!", 1);
 
-        Comment teste2 = new Comment();
-        teste2.setAuthor("Maria");
-        teste2.setDate("01/04/2016 - 12:05");
-        teste2.setContent("Adorei e vou voltar!");
+        Comment teste2 = new Comment("Maria", "Adorei e vou voltar!", 2);
 
         commentsArrayList.add(teste1);
         commentsArrayList.add(teste2);

@@ -9,6 +9,13 @@ public class Comment implements Serializable {
     private String author;
     private String date;
     private String content;
+    private int idNucleus;
+
+    public Comment(String author, String content, int idNucleus){
+        this.author = author;
+        this.content = content;
+        this.idNucleus = idNucleus;
+    }
 
     public String getAuthor() {
         return author;
@@ -33,4 +40,8 @@ public class Comment implements Serializable {
     public void setContent(String content) {
         this.content = content;
     }
+
+    public int getIdNucleus() { return idNucleus; }
+
+    public void setIdNucleus(int idNucleus) { this.idNucleus = idNucleus; }
 }

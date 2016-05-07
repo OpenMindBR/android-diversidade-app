@@ -132,6 +132,7 @@ public class DetailNucleusActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intentCommentActivity = new Intent(getBaseContext(), CommentActivity.class);
+                intentCommentActivity.putExtra("INFOS_NUCLEUS", nucleus);
                 startActivity(intentCommentActivity);
             }
         });

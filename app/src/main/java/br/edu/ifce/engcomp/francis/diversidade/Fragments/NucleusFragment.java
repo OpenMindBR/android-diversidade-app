@@ -66,6 +66,7 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
     private Map<String,Integer> mapNucleusMarker = new HashMap<>();
     private Map<Integer, String> mapNucleusMarkerAux = new HashMap<>();
     ProgressDialog progressDialog;
+    public int flagMap = 0;
 
     public NucleusFragment() {
         // Required empty public constructor
@@ -220,6 +221,7 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
                 }
 
                 progressDialog.dismiss();
+                flagMap = 1;
                 initMarkers();
 
             }
@@ -302,23 +304,25 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
     LocationListener listenerGPS = new LocationListener() {
         @Override
         public void onLocationChanged(Location location) {
-            Log.i("LISTENER", "LocationChanged");
+
         }
 
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {
-            Log.i("LISTENER", "StatusChanged");
+            if(flagMap==0 && status == 2){
+                verifyGPS();
+            }
 
         }
 
         @Override
         public void onProviderEnabled(String provider) {
-            Log.i("LISTENER", "ProviderEnabled");
+
         }
 
         @Override
         public void onProviderDisabled(String provider) {
-            Log.i("LISTENER", "ProviderDisabled");
+
         }
     };
 
