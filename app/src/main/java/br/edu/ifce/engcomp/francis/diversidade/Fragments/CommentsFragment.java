@@ -67,8 +67,6 @@ public class CommentsFragment extends Fragment {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i("RESPONSE-COM", response.toString());
-
                         for(int i =0; i<response.length(); i++){
                             try {
                                 JSONObject jsonObject = response.getJSONObject(i);

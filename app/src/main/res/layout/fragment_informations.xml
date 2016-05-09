@@ -48,14 +48,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="18sp"
-                        android:autoLink="phone"
+                        android:autoLink="all"
                         android:id="@+id/information_phone_text_view"
                         android:layout_marginBottom="2dp" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:autoLink="email"
+                        android:autoLink="all"
                         android:textSize="18sp"
                         android:id="@+id/information_email_text_view"
                         android:layout_marginBottom="2dp" />
@@ -64,7 +64,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="18sp"
-                        android:autoLink="web"
+                        android:autoLink="all"
                         android:id="@+id/information_site_text_view"
                         android:layout_marginBottom="2dp" />
 

@@ -181,10 +181,10 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
                         String site = jsonObject.getString("website");
 
                         String address =  jsonObject.getString("address");
-                        String rua = "";
+                        /*String rua = "";
                         if (address.contains(",")){
                             rua = address.substring(0, address.indexOf(","));
-                        }
+                        }*/
                         String numero = jsonObject.getString("street_number");
                         String bairro = jsonObject.getString("sublocality");
                         String cidade = jsonObject.getString("city");
@@ -205,7 +205,7 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
                         }
 
                         nucleusMap.put(i, new Nucleus(id, name, responsible, phone, email, site, latitude, longitude,
-                                new AddressNucleus(rua, numero, bairro, cidade, estado, pais), servicesN));
+                                new AddressNucleus(address, numero, bairro, cidade, estado, pais), servicesN));
 
                     } catch (JSONException e) {
                         e.printStackTrace();
