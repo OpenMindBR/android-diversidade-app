@@ -59,7 +59,7 @@
     <string name="nucleus_responsible">Responsible: </string>
     <string name="nucleus_phone">Phone number:</string>
     <string name="nucleus_email">E-Mail:</string>
-    <string name="toast_verify_gps">Verify the GPS connection!</string>
+    <string name="toast_verify_gps">Verify the GPS connection and try again!</string>
     <string name="progress_dialog_load">Loading...</string>
     <string name="error_server">Sorry, the server didn\'t work. Try again!</string>
     <string name="snippet_marker_message">Click again to meet the organization.</string>
@@ -67,5 +67,6 @@
     <string name="progress_dialog_post">Posting...</string>
     <string name="toast_success_post">Comment successfully posted!</string>
     <string name="no_comments">There aren\'t any comments yet.</string>
+    <string name="toast_verify_internet">Verify the internet connection and try again!</string>
 
 </resources>

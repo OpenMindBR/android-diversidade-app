@@ -93,10 +93,15 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
     }
 
     void initMap(){
-        mapPlace.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-3.7441914, -38.5380658), 15));
+        mapPlace.moveCamera((CameraUpdateFactory.zoomBy(5)));
 
-        verifyGPS();
-        eventMarkers();
+        if(nucleusOperations.isNetworkAvailable(getActivity())){
+            verifyGPS();
+            eventMarkers();
+        }
+        else {
+            Toast.makeText(getActivity(), R.string.toast_verify_internet, Toast.LENGTH_LONG).show();
+        }
     }
 
     private void verifyGPS(){
@@ -123,6 +128,8 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
         }
 
         if(myPosition!=null){
+            mapPlace.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(myPosition.latitude, myPosition.longitude), 13));
+
             Geocoder geocoderCity = new Geocoder(getActivity(), Locale.getDefault());
             List<Address> addresses;
             String state = null;
@@ -297,10 +304,9 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
 
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {
-            if(flagMap==0 && status == 2){
-                verifyGPS();
+            if(flagMap==0 && provider.equals(LocationManager.GPS_PROVIDER) && status == 2){
+                initMap();
             }
-
         }
 
         @Override

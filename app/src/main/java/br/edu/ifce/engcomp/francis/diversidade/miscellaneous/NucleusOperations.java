@@ -3,6 +3,8 @@ package br.edu.ifce.engcomp.francis.diversidade.miscellaneous;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -47,6 +49,24 @@ public class NucleusOperations {
         else {
             Toast.makeText(context, "Ainda não há núcleos cadastrados no seu estado.", Toast.LENGTH_LONG).show();
         }
+    }
+
+    public static boolean isNetworkAvailable(Context context) {
+
+        ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivity == null) {
+            return false;
+        } else {
+            NetworkInfo[] info = connectivity.getAllNetworkInfo();
+            if (info != null) {
+                for (NetworkInfo anInfo : info) {
+                    if (anInfo.getState() == NetworkInfo.State.CONNECTED) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     public String choseState(String state){
