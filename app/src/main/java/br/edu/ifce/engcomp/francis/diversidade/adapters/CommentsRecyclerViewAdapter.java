@@ -23,14 +23,12 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<CommentsRe
     private RecyclerViewOnClickListenerHack mRecycleViewOnClickListenerHack;
 
     public CommentsRecyclerViewAdapter(Context context, ArrayList<Comment> comments) {
-        this.dataSource = comments;
-        if(dataSource.isEmpty()){
+        if(comments.isEmpty()){
             Toast.makeText(context, R.string.no_comments, Toast.LENGTH_SHORT).show();
         }
-        else {
-            this.dataSource.clear();
-            this.dataSource = comments;
-        }
+
+        this.dataSource.clear();
+        this.dataSource = comments;
         this.context = context;
 
     }

@@ -114,7 +114,7 @@ public class CommentActivity extends AppCompatActivity {
                         progressDialog.dismiss();
                         commentEditText.setText("");
                         userCommentEditText.setText("");
-                        Toast.makeText(getApplication(), R.string.toast_success_post, Toast.LENGTH_SHORT);
+                        Toast.makeText(getApplication(), R.string.toast_success_post, Toast.LENGTH_SHORT).show();
 
                     }
                 }, new Response.ErrorListener() {
@@ -125,10 +125,10 @@ public class CommentActivity extends AppCompatActivity {
                 if(error.networkResponse.statusCode == 406){
                     commentEditText.setText("");
                     userCommentEditText.setText("");
-                    Toast.makeText(getApplication(), R.string.toast_success_post, Toast.LENGTH_SHORT);
+                    Toast.makeText(getApplication(), R.string.toast_success_post, Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Toast.makeText(getApplication(), R.string.error_server, Toast.LENGTH_SHORT);
+                    Toast.makeText(getApplication(), R.string.error_server, Toast.LENGTH_SHORT).show();
                 }
             }
         }) {
