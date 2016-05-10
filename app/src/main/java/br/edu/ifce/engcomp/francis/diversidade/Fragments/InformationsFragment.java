@@ -32,8 +32,6 @@ public class InformationsFragment extends Fragment {
     TextView email;
     TextView site;
     TextView logradouro;
-    TextView bairroCidade;
-    TextView estadoPais;
 
     public InformationsFragment() {
         // Required empty public constructor
@@ -51,20 +49,16 @@ public class InformationsFragment extends Fragment {
         email  = (TextView) view.findViewById(R.id.information_email_text_view);
         site  = (TextView) view.findViewById(R.id.information_site_text_view);
         logradouro  = (TextView) view.findViewById(R.id.street_text_view);
-        bairroCidade  = (TextView) view.findViewById(R.id.neighborhood_and_city_text_view);
-        estadoPais  = (TextView) view.findViewById(R.id.state_and_country_text_view);
 
         Intent currentIntent = getActivity().getIntent();
         nucleus = (Nucleus) currentIntent.getSerializableExtra("INFOS_NUCLEUS");
 
-        responsavel.setText(R.string.nucleus_responsible + nucleus.getResponsible());
+        responsavel.setText(nucleus.getResponsible());
         telefone.setText(nucleus.getPhone());
         email.setText(nucleus.getEmail());
         site.setText(nucleus.getSite());
 
-        logradouro.setText(nucleus.getAddress().getLogradouro() + ", " + nucleus.getAddress().getNumber());
-        bairroCidade.setText(nucleus.getAddress().getNeighborhood() + ", " + nucleus.getAddress().getCity());
-        estadoPais.setText(nucleus.getAddress().getState() + " - " + nucleus.getAddress().getCountry());
+        logradouro.setText(nucleus.getAddress().getLogradouro());
 
         return view;
     }

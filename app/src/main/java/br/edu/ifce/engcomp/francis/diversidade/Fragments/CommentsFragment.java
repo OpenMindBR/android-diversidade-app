@@ -40,7 +40,6 @@ public class CommentsFragment extends Fragment {
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
     ArrayList<Comment> dataSource = new ArrayList<>();
-    ArrayList<Comment> comments = new ArrayList<>();
     ProgressDialog progressDialog;
     Nucleus nucleus;
     CommentsRecyclerViewAdapter adapter;
@@ -67,6 +66,7 @@ public class CommentsFragment extends Fragment {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        dataSource.clear();
                         for(int i =0; i<response.length(); i++){
                             try {
                                 JSONObject jsonObject = response.getJSONObject(i);

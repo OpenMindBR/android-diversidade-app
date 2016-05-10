@@ -181,10 +181,6 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
                         String site = jsonObject.getString("website");
 
                         String address =  jsonObject.getString("address");
-                        /*String rua = "";
-                        if (address.contains(",")){
-                            rua = address.substring(0, address.indexOf(","));
-                        }*/
                         String numero = jsonObject.getString("street_number");
                         String bairro = jsonObject.getString("sublocality");
                         String cidade = jsonObject.getString("city");

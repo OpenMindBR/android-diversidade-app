@@ -18,17 +18,21 @@ import br.edu.ifce.engcomp.francis.diversidade.model.Comment;
  * Created by Joamila on 10/04/2016.
  */
 public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<CommentsRecyclerViewAdapter.ViewHolder>{
-    private ArrayList<Comment> dataSource;
+    private ArrayList<Comment> dataSource = new ArrayList<>();
     private Context context;
     private RecyclerViewOnClickListenerHack mRecycleViewOnClickListenerHack;
 
     public CommentsRecyclerViewAdapter(Context context, ArrayList<Comment> comments) {
         this.dataSource = comments;
-        this.context = context;
-
         if(dataSource.isEmpty()){
             Toast.makeText(context, R.string.no_comments, Toast.LENGTH_SHORT).show();
         }
+        else {
+            this.dataSource.clear();
+            this.dataSource = comments;
+        }
+        this.context = context;
+
     }
 
     @Override

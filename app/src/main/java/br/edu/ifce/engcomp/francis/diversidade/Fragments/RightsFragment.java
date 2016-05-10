@@ -123,14 +123,7 @@ public class RightsFragment extends Fragment implements RecyclerViewOnClickListe
 
     @Override
     public void onClickListener(View view, int position) {
-        String urlSource = "";
-
-        if(!urlSource.startsWith("http://", 0)){
-            urlSource = "http://" + dataSource.get(position).getSource();
-        }
-        else {
-            urlSource = dataSource.get(position).getSource();
-        }
+        String urlSource = dataSource.get(position).getSource();
 
         Uri uri = Uri.parse(urlSource);
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);

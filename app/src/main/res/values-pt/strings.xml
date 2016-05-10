@@ -62,7 +62,7 @@
     <string name="toast_verify_gps">Verifique a conexão do GPS e aguarde!</string>
     <string name="progress_dialog_load">Carregando...</string>
     <string name="error_server">Perdão, o servidor não respondeu. Tente novamente!</string>
-    <string name="snippet_marker_message">Clique mais uma vez e conheça este núcleo..</string>
+    <string name="snippet_marker_message">Clique mais uma vez e conheça este núcleo.</string>
     <string name="toast_any_nucleus">\Ainda não há núcleos cadastrados no seu estado.</string>
     <string name="no_comments">Ainda não há comentários.</string>
     <string name="progress_dialog_post">Postando...</string>
