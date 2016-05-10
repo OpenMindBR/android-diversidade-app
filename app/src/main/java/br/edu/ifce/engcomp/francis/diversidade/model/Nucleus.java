@@ -7,14 +7,50 @@ import java.util.ArrayList;
  * Created by Bolsista on 12/04/2016.
  */
 public class Nucleus implements Serializable {
+    int id;
     String name;
+    String responsible;
     String phone;
     String email;
     String site;
     AddressNucleus address;
-    HourNucleus hour;
+    double latitude;
+    double longitude;
+    ArrayList<HourNucleus> hour;
     ArrayList<Comment> comments;
     ArrayList<Service> services;
+
+    public Nucleus(int id, String name, String phone, String email, String site, AddressNucleus address, long latitude,
+                   long longitude, ArrayList<HourNucleus> hours, ArrayList<Service> services){
+        this.id = id;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.site = site;
+        this.address = address;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.hour = hours;
+        this.services = services;
+    }
+
+    public Nucleus(int id, String name, String responsible, String phone, String email, String site, double latitude,
+                   double longitude, AddressNucleus address,ArrayList<Service> services){
+        this.id = id;
+        this.name = name;
+        this.responsible = responsible;
+        this.phone = phone;
+        this.email = email;
+        this.site = site;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.address = address;
+        this.services = services;
+    }
+
+    public int getId() { return id; }
+
+    public void setId(int id) { this.id = id; }
 
     public String getName() {
         return name;
@@ -56,11 +92,19 @@ public class Nucleus implements Serializable {
         this.address = address;
     }
 
-    public HourNucleus getHour() {
+    public double getLatitude() { return latitude; }
+
+    public void setLatitude(long latitude) { this.latitude = latitude; }
+
+    public double getLongitude() { return longitude; }
+
+    public void setLongitude(long longitude) { this.longitude = longitude; }
+
+    public ArrayList<HourNucleus> getHour() {
         return hour;
     }
 
-    public void setHour(HourNucleus hour) {
+    public void setHour(ArrayList<HourNucleus> hour) {
         this.hour = hour;
     }
 
@@ -78,5 +122,21 @@ public class Nucleus implements Serializable {
 
     public void setServices(ArrayList<Service> services) {
         this.services = services;
+    }
+
+    public String getResponsible() {
+        return responsible;
+    }
+
+    public void setResponsible(String responsible) {
+        this.responsible = responsible;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 }

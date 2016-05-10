@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/textPrimaryColor"
-                android:text="NÚCLEO TESTE"
+
                 android:layout_marginBottom="5dp"
                 android:shadowColor="@color/textPrimaryColor"
                 android:shadowRadius="6"
@@ -70,7 +70,6 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/textPrimaryColor"
-                android:text="Fortaleza - CE"
                 android:elegantTextHeight="false"
                 android:focusableInTouchMode="false"
                 android:shadowColor="@color/textPrimaryColor"

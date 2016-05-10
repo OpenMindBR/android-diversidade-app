@@ -1,5 +1,6 @@
 package br.edu.ifce.engcomp.francis.diversidade.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 
 import br.edu.ifce.engcomp.francis.diversidade.R;
 import br.edu.ifce.engcomp.francis.diversidade.adapters.ServicesRecyclerViewAdapter;
+import br.edu.ifce.engcomp.francis.diversidade.model.Nucleus;
 import br.edu.ifce.engcomp.francis.diversidade.model.Service;
 
 /**
@@ -27,28 +29,11 @@ public class ServicesFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public ArrayList<Service> generateDataSourceMock(){
-        ArrayList<Service> servicesArrayList = new ArrayList<>();
-
-        Service teste1 = new Service();
-        teste1.setName("Consulta Psicológica");
-        teste1.setCategory("Saúde");
-
-        Service teste2 = new Service();
-        teste2.setName("Grupo de Apoio");
-        teste2.setCategory("Social");
-
-        servicesArrayList.add(teste1);
-        servicesArrayList.add(teste2);
-
-        return servicesArrayList;
-    }
-
     @Override
     public void onCreate(Bundle savedInstace){
         super.onCreate(savedInstace);
 
-        dataSource = generateDataSourceMock();
+        //dataSource = generateDataSourceMock();
     }
 
     @Override
@@ -56,6 +41,11 @@ public class ServicesFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_services, container, false);
+
+        Intent currentIntent = getActivity().getIntent();
+        Nucleus nucleus = (Nucleus) currentIntent.getSerializableExtra("INFOS_NUCLEUS");
+
+        dataSource = nucleus.getServices();
 
         ServicesRecyclerViewAdapter adapter = new ServicesRecyclerViewAdapter(getActivity().getApplicationContext(), dataSource);
         this.layoutManager = new LinearLayoutManager(getActivity());

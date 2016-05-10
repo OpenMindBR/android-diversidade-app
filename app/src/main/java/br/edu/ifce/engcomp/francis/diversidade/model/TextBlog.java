@@ -9,6 +9,13 @@ public class TextBlog {
     private String source;
     private String category;
 
+    public TextBlog(String title, String content, String source, String category){
+        this.title = title;
+        this.content = content;
+        this.source = source;
+        this.category = category;
+    }
+
     public String getCategory() {
         return category;
     }

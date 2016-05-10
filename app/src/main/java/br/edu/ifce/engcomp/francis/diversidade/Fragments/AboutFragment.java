@@ -36,9 +36,9 @@ public class AboutFragment extends Fragment implements RecyclerViewOnClickListen
 
     public String initDescription(){
         String textDescription = "O aplicativo Diversidade é fruto da disciplina Projeto Social do Instituto Federal de Educação, " +
-                "Ciência e Tecnologia do Ceará. A proposta do aplicativo é mapear locais e eventos que oferecem serviços gratuitos de " +
-                "apoio à comunidade LGBT no Ceará. Esses serviços podem se encaixar nas categorias principais: saúde, educação, direitos, " +
-                "lazer, cultura, socialização e convívio. Esperamos que essa iniciativa contribua para a inserção das pessoas LGBT em sua " +
+                "Ciência e Tecnologia do Ceará. A proposta do aplicativo é mapear locais e eventos que ofereçam serviços gratuitos de " +
+                "apoio à comunidade LGBT no Ceará. Esses serviços podem se encaixar nas categorias principais: Saúde, Educação, Direitos, " +
+                "Lazer, Cultura, Socialização e Convívio. Esperamos que esta iniciativa contribua para a inserção das pessoas LGBTs em sua " +
                 "comunidade, para que assim todo o grupo se fortaleça.";
 
         return textDescription;
@@ -50,27 +50,23 @@ public class AboutFragment extends Fragment implements RecyclerViewOnClickListen
         Developer andre = new Developer("André Coelho");
         ArrayList<Contact> andreContacts = new ArrayList<>();
         andreContacts.add(new Contact("gmail", "andrecoelho03@gmail.com"));
-        andreContacts.add(new Contact("facebook", "fb.com/"));
-        andreContacts.add(new Contact("twitter", "twitter.com/"));
-        andreContacts.add(new Contact("instagram", "instagram.com/"));
-        andreContacts.add(new Contact("github", "github.com/"));
+        andreContacts.add(new Contact("github", "github.com/andrecastro"));
         andre.setContacts(andreContacts);
 
         Developer francisco = new Developer("Francisco Souza");
         ArrayList<Contact> franciscoContacts = new ArrayList<>();
         franciscoContacts.add(new Contact("gmail", "francisceioseph@gmail.com"));
-        franciscoContacts.add(new Contact("facebook", "fb.com/"));
-        franciscoContacts.add(new Contact("twitter", "twitter.com/"));
-        franciscoContacts.add(new Contact("instagram", "instagram.com/"));
-        franciscoContacts.add(new Contact("github", "github.com/"));
+        franciscoContacts.add(new Contact("facebook", "fb.com/franciscojose.araujo2"));
+        franciscoContacts.add(new Contact("twitter", "twitter.com/franciscojoser"));
+        franciscoContacts.add(new Contact("instagram", "instagram.com/francisceioseph"));
+        franciscoContacts.add(new Contact("github", "github.com/francisceioseph"));
         francisco.setContacts(franciscoContacts);
 
         Developer joamila = new Developer("Joamila Brito");
         ArrayList<Contact> joamilaContacts = new ArrayList<>();
         joamilaContacts.add(new Contact("gmail", "joamila.brito@gmail.com"));
         joamilaContacts.add(new Contact("facebook", "fb.com/joamilab"));
-        joamilaContacts.add(new Contact("twitter", "@joamila"));
-        joamilaContacts.add(new Contact("instagram", "@joamilab"));
+        joamilaContacts.add(new Contact("twitter", "twitter.com/joamila"));
         joamilaContacts.add(new Contact("github", "github.com/joamilab"));
         joamila.setContacts(joamilaContacts);
 
