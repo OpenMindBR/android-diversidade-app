@@ -93,8 +93,6 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
     }
 
     void initMap(){
-        mapPlace.moveCamera((CameraUpdateFactory.zoomBy(5)));
-
         if(nucleusOperations.isNetworkAvailable(getActivity())){
             verifyGPS();
             eventMarkers();
