@@ -8,7 +8,6 @@
     <string name="action_settings">Configurações</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_detail_nucleus">Detalhes</string>
     <string name="title_activity_splash">Diversidade</string>
 
@@ -22,7 +21,7 @@
     <string name="place_tab_services">Serviços</string>
     <string name="place_tab_comments">Comentários</string>
 
-    <string name="message_fail_gps">Verifique a conexão do GPS e aguarde!</string>
+    <string name="message_fail_gps">Verifique a conexão do GPS!</string>
 
     <string name="developer_name_lastname">First name and Last name</string>
     <string name="title_splash">Diversidade</string>
@@ -68,6 +67,6 @@
     <string name="progress_dialog_post">Postando...</string>
     <string name="toast_success_post">Comentário postado com sucesso!</string>
     <string name="toast_verify_internet">Verifique a conexão de internet e tente novamente!</string>
-    <string name="nucleus_site">Website:</string>
+    <string name="nucleus_site">Website: </string>
 
 </resources>
