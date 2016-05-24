@@ -301,9 +301,7 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
 
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {
-            if(flagMap==0){
-                initMap();
-            }
+
         }
 
         @Override
