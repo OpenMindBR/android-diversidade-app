@@ -126,6 +126,7 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
         }
 
         if(myPosition!=null){
+            flagMap=1;
             mapPlace.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(myPosition.latitude, myPosition.longitude), 13));
 
             Geocoder geocoderCity = new Geocoder(getActivity(), Locale.getDefault());
@@ -173,8 +174,6 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(urlNucleusState, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                Log.i("RESPONSE", response.toString());
-
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         JSONObject jsonObject = response.getJSONObject(i);
@@ -214,16 +213,13 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
                 }
 
                 progressDialog.dismiss();
-                flagMap = 1;
                 initMarkers();
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
                 progressDialog.dismiss();
-                Log.i("RESPONSE", error.toString());
                 Toast.makeText(getActivity(), R.string.error_server, Toast.LENGTH_SHORT).show();
             }
         }){
@@ -297,19 +293,19 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
     LocationListener listenerGPS = new LocationListener() {
         @Override
         public void onLocationChanged(Location location) {
+            if(flagMap==0){
+                initMap();
+            }
 
         }
 
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {
-            if(flagMap==0 && provider.equals(LocationManager.GPS_PROVIDER) && status == 2){
-                initMap();
-            }
+
         }
 
         @Override
         public void onProviderEnabled(String provider) {
-
         }
 
         @Override
