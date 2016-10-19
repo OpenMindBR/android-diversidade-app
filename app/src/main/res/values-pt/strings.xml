@@ -28,24 +28,6 @@
     <string name="slogan_splash">Seja você, seja feliz!</string>
     <string name="developers_text_view">Desenvolvedores</string>
 
-    <string name="nucleus_name_sug">Name of nucleus or event</string>
-    <string name="hint_nucleus_name">Type a name</string>
-    <string name="nucleus_address_sug">Address</string>
-    <string name="hint_nucleus_address">Street, Number, District</string>
-    <string name="nucleus_cep_sug">CEP</string>
-    <string name="hint_only_numbers">Only numbers</string>
-    <string name="nucleus_state_sug">State</string>
-    <string name="hint_nucleus_state">Ex: CE</string>
-    <string name="nucleus_country_sug">Country</string>
-    <string name="hint_nucleus_country">Name of country</string>
-    <string name="nucleus_responsible_sug">Name of responsible person</string>
-    <string name="nucleus_phone_sug">Phone number</string>
-    <string name="nucleus_email_sug">E-mail</string>
-    <string name="hint_nucleus_email">Contact e-mail</string>
-    <string name="nucleus_services_sug">Services offered</string>
-    <string name="hint_separated_commas">Separated by commas</string>
-    <string name="nucleus_button_send">Send</string>
-
     <string name="title_menu_nav">Diversidade: seja você, seja feliz!</string>
     <string name="site_menu_nav"></string>
     <string name="title_activity_comment">Comente</string>
