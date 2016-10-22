@@ -42,12 +42,13 @@
     <string name="toast_verify_gps">Verify the GPS connection and try again!</string>
     <string name="progress_dialog_load">Loading...</string>
     <string name="error_server">Sorry, the server didn\'t work. Try again!</string>
-    <string name="snippet_marker_message">Click again to meet the organization.</string>
+    <string name="snippet_marker_message">click again to meet the organization</string>
     <string name="toast_any_nucleus">There aren\'t any nucleus in your state yet.</string>
     <string name="progress_dialog_post">Posting...</string>
     <string name="toast_success_post">Comment successfully posted!</string>
     <string name="no_comments">There aren\'t any comments yet.</string>
     <string name="toast_verify_internet">Verify internet connection!</string>
     <string name="nucleus_site">Website: </string>
+    <string name="snippet_marker_event_message">click again for event infos</string>
 
 </resources>

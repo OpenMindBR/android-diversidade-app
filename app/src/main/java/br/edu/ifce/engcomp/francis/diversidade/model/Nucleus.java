@@ -13,6 +13,7 @@ public class Nucleus implements Serializable {
     String phone;
     String email;
     String site;
+    String type;
     AddressNucleus address;
     double latitude;
     double longitude;
@@ -20,28 +21,15 @@ public class Nucleus implements Serializable {
     ArrayList<Comment> comments;
     ArrayList<Service> services;
 
-    public Nucleus(int id, String name, String phone, String email, String site, AddressNucleus address, long latitude,
-                   long longitude, ArrayList<HourNucleus> hours, ArrayList<Service> services){
-        this.id = id;
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.site = site;
-        this.address = address;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.hour = hours;
-        this.services = services;
-    }
-
-    public Nucleus(int id, String name, String responsible, String phone, String email, String site, double latitude,
-                   double longitude, AddressNucleus address,ArrayList<Service> services){
+    public Nucleus(int id, String name, String responsible, String phone, String email, String site, String type,
+                   double latitude, double longitude, AddressNucleus address,ArrayList<Service> services){
         this.id = id;
         this.name = name;
         this.responsible = responsible;
         this.phone = phone;
         this.email = email;
         this.site = site;
+        this.type = type;
         this.latitude = latitude;
         this.longitude = longitude;
         this.address = address;
@@ -74,6 +62,14 @@ public class Nucleus implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getSite() {

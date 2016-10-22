@@ -43,12 +43,13 @@
     <string name="toast_verify_gps">Vérifiez la connexion GPS!</string>
     <string name="progress_dialog_load">Chargement...</string>
     <string name="error_server">Pardon, le serveur n\'a pas répondu. Réessayez!</string>
-    <string name="snippet_marker_message">Cliquez encore pour découvrir le base.</string>
+    <string name="snippet_marker_message">cliquez encore pour découvrir cette place</string>
     <string name="toast_any_nucleus">Il n\'y a pas encore de base registré dans votre état.</string>
     <string name="no_comments">Pas de commentaires.</string>
     <string name="progress_dialog_post">Déposant...</string>
     <string name="toast_success_post">Commentaire deposé avec succès!</string>
     <string name="toast_verify_internet">Vérifiez la connexion internet e réessayez!</string>
     <string name="nucleus_site">Website: </string>
+    <string name="snippet_marker_event_message">cliquez encore pour plus de infos</string>
 
 </resources>

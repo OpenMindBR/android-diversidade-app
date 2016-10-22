@@ -40,7 +40,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -183,6 +186,7 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
                         String email = jsonObject.getString("email");
                         String phone = jsonObject.getString("phone");
                         String site = jsonObject.getString("website");
+                        String type = jsonObject.getString("description");
 
                         String address =  jsonObject.getString("address");
                         String numero = jsonObject.getString("street_number");
@@ -204,7 +208,7 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
                             servicesN.add(new Service(title, description));
                         }
 
-                        nucleusMap.put(i, new Nucleus(id, name, responsible, phone, email, site, latitude, longitude,
+                        nucleusMap.put(i, new Nucleus(id, name, responsible, phone, email, site, type, latitude, longitude,
                                 new AddressNucleus(address, numero, bairro, cidade, estado, pais), servicesN));
 
                     } catch (JSONException e) {
@@ -213,7 +217,11 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
                 }
 
                 progressDialog.dismiss();
-                initMarkers();
+                try {
+                    initMarkers();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
 
             }
         }, new Response.ErrorListener() {
@@ -235,14 +243,27 @@ public class NucleusFragment extends Fragment implements OnMapReadyCallback, Goo
         queue.add(jsonArrayRequest);
     }
 
-    public void initMarkers() {
+    public void initMarkers() throws ParseException {
         if(!nucleusMap.isEmpty()){
             for(int i = 0; i<nucleusMap.size(); i++){
                 Marker marker =  mapPlace.addMarker(new MarkerOptions().position(new LatLng(nucleusMap.get(i).getLatitude(),
                         nucleusMap.get(i).getLongitude()))
-                        .title(nucleusMap.get(i).getName())
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET))
-                        .snippet(getResources().getString(R.string.snippet_marker_message)));
+                        .title(nucleusMap.get(i).getName()));
+
+                if(nucleusMap.get(i).getType().contains("NÚCLEO")){
+                    marker.setIcon((BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
+                    marker.setSnippet((getResources().getString(R.string.snippet_marker_message)));
+                }
+                else{
+                    SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                    Date dataEvento = (Date) format.parse(nucleusMap.get(i).getType());
+                    Date dataHoje = new Date();
+
+                    marker.setIcon((BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)));
+                    marker.setSnippet((getResources().getString(R.string.snippet_marker_event_message)));
+
+                    if(dataHoje.after(dataEvento)) marker.setAlpha((float) 0.6);
+                }
 
                 mapNucleusMarker.put(marker.getId(), nucleusMap.get(i).getId());
                 mapNucleusMarkerAux.put(nucleusMap.get(i).getId(), marker.getId());
