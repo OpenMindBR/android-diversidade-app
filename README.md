@@ -1,5 +1,6 @@
 # Diversidade: seja você, seja feliz!
 A versão android do aplicativo diversidade
+https://play.google.com/store/apps/details?id=br.edu.ifce.engcomp.francis.diversidade
 
 O aplicativo Diversidade é fruto da disciplina Projeto Social do Instituto Federal de Educação, Ciência e Tecnologia do Ceará. 
 A proposta do aplicativo é mapear locais e eventos que ofereçam serviços gratuitos de apoio à comunidade LGBT no Ceará. Esses serviços 
